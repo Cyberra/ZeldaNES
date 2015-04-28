@@ -1,19 +1,15 @@
-#ifndef ResourcesID
-#define ResourcesID
+#ifndef RESSOURCEID
+#define RESSOURCEID
 
-
-/*    Exemple
+/*   EXEMPLE
 namespace Texture
 {
 	enum ID
 	{
-		Gimmick,
-		PixelCat
+		Mario,
+		Level1n1
 	};
 }
 */
 
-
-
-
-#endif 
+#endif
