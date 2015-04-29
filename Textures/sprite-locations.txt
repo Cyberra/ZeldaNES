@@ -19,4 +19,8 @@ Blue Moblins: 	(64, 80) 16x16
 		(128, 80) 16x16
 		(160, 80) 16x16
 
-Aquamentis:	(3, 128) 24+x32
+Aquamentis:	(3, 128) 24x32
+
+Bomb:		(196, 66) 8x14
+
+Explosion/spawn:(80, 32) 16x16
