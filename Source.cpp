@@ -10,7 +10,7 @@ int main(int argc, char* args[])
 	Engine::GetInstance()->Init(SCREEN_LENGTH, SCREEN_HEIGHT);
 
 	// Loading resources
-	//Textures->LoadTexture(Texture::ID::Mario, "Images/mario.png");
+	Textures->LoadTexture(Texture::ID::LinkAnims, "Textures/ZeldaSprites.png");
 	//Textures->LoadTexture(Texture::ID::Level1n1, "Images/MapStuff.png");
 	//Sounds->LoadSound(SE::ID::MarioJump, "SE/MarioJump.mp3");
 	//Musics->LoadMusic(Musiceroni::ID::Music1, "Music/MusicLevel1.mp3");
