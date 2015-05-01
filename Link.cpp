@@ -46,6 +46,16 @@ void Link::changeState(state newState)
 			this->SetNbFrame(WALK_NB_FRAME());
 			this->SetFrameRate(ANIM_DEFAULT_SPEED);
 			break;
+		case ATK_SWORD:
+			this->SetSrcPos(WALK_DOWN_START_SRC());
+			this->SetNbFrame(WALK_NB_FRAME());
+			this->SetFrameRate(ANIM_DEFAULT_SPEED);
+			break;
+		case ATK_NO_SWORD:
+			this->SetSrcPos(WALK_DOWN_START_SRC());
+			this->SetNbFrame(WALK_NB_FRAME());
+			this->SetFrameRate(ANIM_DEFAULT_SPEED);
+			break;
 		default:
 			break;
 		}
@@ -100,5 +110,10 @@ void Link::Update()
 	{
 		changeState(WALK_RIGHT);
 		linkX++;
+	}
+
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_KP_1)
+	{
+
 	}
 }
