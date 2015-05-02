@@ -26,20 +26,16 @@ void DotD::Move(Tile *tiles[TileManager::TOTAL_TILES])
 {
 	Vector2D direction = Vector2D(
 		Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A) ? -1.0f : 0 + Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D) ? 1.0f : 0,
-		Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S) ? 1.0f : 0 + Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W) ? -1.0f : 0)
-		;
-//	std::cout << direction.x << ", " << direction.y << std::endl;
+		Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S) ? 1.0f : 0 + Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W) ? -1.0f : 0);
 
 	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
 	//Move the dot left or right
 	currentX += (SPEED * direction.x) * dt;
-	//std::cout << dt << std::endl;
 
 	//If the dot went too far to the left or right or touched a wall
 	if ((box.x < 0) || (box.x + DOT_WIDTH > LEVEL_WIDTH) || TileManager::TouchesWall(box, tiles))
 	{
 		//move back
-		//std::cout << dt << std::endl;
 		currentX -= (SPEED * direction.x) * dt;
 	}
 
@@ -50,7 +46,6 @@ void DotD::Move(Tile *tiles[TileManager::TOTAL_TILES])
 	if ((box.y < 0) || (box.y + DOT_HEIGHT > LEVEL_HEIGHT) || TileManager::TouchesWall(box, tiles))
 	{
 		//move back
-		//std::cout << "OUCH!!" << std::endl;
 		currentY -= (SPEED * direction.y) * dt;
 	}
 	SetPosition(currentX, currentY);
