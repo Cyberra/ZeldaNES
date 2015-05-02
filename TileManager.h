@@ -1,5 +1,9 @@
 #pragma once
 
+/*
+	This is the class that contains all the tiles and check for collision of a given object !
+*/
+
 #include "Libraries.h"
 #include "Tile.h"
 #include "Rectangle.h"
@@ -13,12 +17,17 @@ public:
 	TileManager();
 	~TileManager();
 
+	// Tiles constants
 	static const int TOTAL_TILES = 192;
 	static const int TOTAL_TILE_SPRITES = 12;
 
+	// CheckCollision
 	static bool TouchesWall(SDL_Rect box, Tile* tiles[TOTAL_TILES]);
+
+	// Set the map with a given .map text file NB:See example lazy.map in the folder
 	bool SetTiles(Tile* tiles[TOTAL_TILES]);
 
+	// The array of all the tiles 1D for simplicity purpose
 	static Tile *tiles[TOTAL_TILES];
 
 private:

@@ -3,12 +3,11 @@
 const int DotD::DOT_WIDTH;
 const int DotD::DOT_HEIGHT;
 
-const float DotD::SPEED = 100.0f;
-
 DotD::DotD()
 	: Sprite(Texture::ID::Dot)
 	, currentX(0)
 	, currentY(0)
+	, SPEED(100.0f)
 {
 	box.w = DOT_WIDTH;
 	box.h = DOT_HEIGHT;
@@ -22,6 +21,7 @@ DotD::~DotD()
 
 }
 
+// Move and check collision
 void DotD::Move(Tile *tiles[TileManager::TOTAL_TILES])
 {
 	Vector2D direction = Vector2D(
@@ -33,10 +33,10 @@ void DotD::Move(Tile *tiles[TileManager::TOTAL_TILES])
 	currentX += (SPEED * direction.x) * dt;
 
 	//If the dot went too far to the left or right or touched a wall
-	if ((box.x < 0) || (box.x + DOT_WIDTH > LEVEL_WIDTH) || TileManager::TouchesWall(box, tiles))
+	if ((box.x < 0) || (box.x + DOT_WIDTH > LEVEL_WIDTH) || TileManager::TouchesWall(box, tiles)) //<---This the function to check collision (TouchesWall)
 	{
 		//move back
-		currentX -= (SPEED * direction.x) * dt;
+		currentX -= (SPEED * direction.x) * dt + direction.x;
 	}
 
 	//Move the dot up or down
@@ -46,18 +46,20 @@ void DotD::Move(Tile *tiles[TileManager::TOTAL_TILES])
 	if ((box.y < 0) || (box.y + DOT_HEIGHT > LEVEL_HEIGHT) || TileManager::TouchesWall(box, tiles))
 	{
 		//move back
-		currentY -= (SPEED * direction.y) * dt;
+		currentY -= (SPEED * direction.y) * dt + direction.y;
 	}
 	SetPosition(currentX, currentY);
 	MoveBox();
 }
 
+// Move the collider
 void DotD::MoveBox()
 {
 	box.x = (int)currentX;
 	box.y = (int)currentY;
 }
 
+// Update Everything!!!!!!!...Player related Indeed
 void DotD::Update()
 {
 	Sprite::Update();
