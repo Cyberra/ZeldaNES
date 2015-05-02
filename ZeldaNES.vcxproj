@@ -80,13 +80,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DotD.cpp" />
     <ClCompile Include="Link.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DotD.h" />
     <ClInclude Include="Libraries.h" />
     <ClInclude Include="Link.h" />
     <ClInclude Include="RessourceID.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

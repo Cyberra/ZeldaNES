@@ -6,7 +6,9 @@ namespace Texture
 {
 	enum ID
 	{
-		LinkAnims
+		LinkAnims,
+		Dot,
+		Tile
 	};
 }
 
