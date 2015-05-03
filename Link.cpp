@@ -160,6 +160,8 @@ void Link::Update()
 	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
 	Animation::Update();
 	Move(TileManager::tiles);
+
+
 	//////////////////////////////////////////////
 	// ANIMATIONS
 	//////////////////////////////////////////////
@@ -195,48 +197,65 @@ void Link::Update()
 		changeState(WALK_RIGHT);
 		isMoving = true;
 	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_D) ||
+
+	if		(Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_D) ||
 			 Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_S) ||
 			 Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_A) ||
 			 Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_W)	)
 	{
 		isMoving = false;
 	}
-	if (!isAttacking && !isMoving)
-	{
-		changeState(IDLE);
-	}
+	
 	if (isAttacking)
 	{
-		Attack(dt);
+ 		Attack(dt);
 	}
 	
-	// KP 1
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_L) && facingLeft == true)
+	// L
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && facingLeft)
 	{
 		changeState(ATK_LEFT);
-		isAttacking = true;
-	
 	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_L) && facingRight == true)
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && facingRight)
 	{
 		changeState(ATK_RIGHT);
-		isAttacking = true;
-
 	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_L) && facingUp == true)
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && facingUp)
 	{
 		changeState(ATK_UP);
-		isAttacking = true;
 	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_L) && facingDown == true)
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && facingDown)
 	{
 		changeState(ATK_DOWN);
+	}
+	else if (Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_L))
+	{
 		isAttacking = true;
+	}
+
+	if (!Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && !Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A) && facingLeft)
+	{
+		changeState(WALK_LEFT);
+		changeState(IDLE);
+	}
+	if (!Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && !Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D) && facingRight)
+	{
+		changeState(WALK_RIGHT);
+		changeState(IDLE);
+	}
+	if (!Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && !Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W) && facingUp)
+	{
+		changeState(WALK_UP);
+		changeState(IDLE);
+	}
+	if (!Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && !Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S) && facingDown)
+	{
+		changeState(WALK_DOWN);
+		changeState(IDLE);
 	}
 
 	// If Link picks up a collectable  ////// TODO ///////
-	if (isCollecting == true)
+	if (isCollecting)
 	{
 		changeState(PICK_OBJECT);
 	}
@@ -248,7 +267,6 @@ void Link::Attack(float time)
 	{
 		isAttacking = false;
 		attackTimer = 0;
-		changeState(IDLE);
 	}
 }
 void Link::FaceUp()
