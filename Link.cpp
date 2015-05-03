@@ -7,6 +7,7 @@ Link::Link()
 	, linkX(0)
 	, linkY(0)
 	, SPEED(100.0f)
+	, attackTimer(0.0f)
 {
 	//Start the animation on creation
 	this->Play();
@@ -156,10 +157,9 @@ void Link::MoveBox()
 // Update Everything!!!!!!!
 void Link::Update()
 {
+	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
 	Animation::Update();
 	Move(TileManager::tiles);
-
-
 	//////////////////////////////////////////////
 	// ANIMATIONS
 	//////////////////////////////////////////////
@@ -167,79 +167,72 @@ void Link::Update()
 	// W
 	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W))
 	{
-		faceLeft = false;
-		faceRight = false;
-		faceUp = true;
-		faceDown = false;
+		FaceUp();
 		changeState(WALK_UP);
-	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_W))
-	{
-		changeState(IDLE);
+		isMoving = true;
 	}
 
 	// A
 	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A))
 	{
-		faceLeft = true;
-		faceRight = false;
-		faceUp = false;
-		faceDown = false;
+		FaceLeft();
 		changeState(WALK_LEFT);
-	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_A))
-	{
-		changeState(IDLE);
+		isMoving = true;
 	}
 
 	// S
 	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S))
 	{
-		faceLeft = false;
-		faceRight = false;
-		faceUp = false;
-		faceDown = true;
+		FaceDown();
 		changeState(WALK_DOWN);
-	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_S))
-	{
-		changeState(IDLE);
+		isMoving = true;
 	}
 
 	// D
 	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D))
 	{
-		faceLeft = false;
-		faceRight = true;
-		faceUp = false;
-		faceDown = false;
+		FaceRight();
 		changeState(WALK_RIGHT);
+		isMoving = true;
 	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_D))
+	else if (Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_D) ||
+			 Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_S) ||
+			 Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_A) ||
+			 Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_W)	)
+	{
+		isMoving = false;
+	}
+	if (!isAttacking && !isMoving)
 	{
 		changeState(IDLE);
+	}
+	if (isAttacking)
+	{
+		Attack(dt);
 	}
 	
 	// KP 1
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_L) && faceLeft == true)
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_L) && facingLeft == true)
 	{
 		changeState(ATK_LEFT);
+		isAttacking = true;
+	
 	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_L) && faceRight == true)
+	else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_L) && facingRight == true)
 	{
 		changeState(ATK_RIGHT);
+		isAttacking = true;
+
 	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_L) && faceUp == true)
+	else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_L) && facingUp == true)
 	{
 		changeState(ATK_UP);
+		isAttacking = true;
 	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_L) && faceDown == true)
+	else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_L) && facingDown == true)
 	{
 		changeState(ATK_DOWN);
-	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_L))
-	{
-		changeState(IDLE);
+		isAttacking = true;
 	}
 
 	// If Link picks up a collectable  ////// TODO ///////
@@ -247,6 +240,44 @@ void Link::Update()
 	{
 		changeState(PICK_OBJECT);
 	}
+}
+void Link::Attack(float time)
+{
+	attackTimer += time;
+	if (attackTimer > 0.5f)
+	{
+		isAttacking = false;
+		attackTimer = 0;
+		changeState(IDLE);
+	}
+}
+void Link::FaceUp()
+{
+	facingLeft = false;
+	facingRight = false;
+	facingUp = true;
+	facingDown = false;
+}
+void Link::FaceDown()
+{
+	facingLeft = false;
+	facingRight = false;
+	facingUp = false;
+	facingDown = true;
+}
+void Link::FaceLeft()
+{
+	facingLeft = true;
+	facingRight = false;
+	facingUp = false;
+	facingDown = false;
+}
+void Link::FaceRight()
+{
+	facingLeft = false;
+	facingRight = true;
+	facingUp = false;
+	facingDown = false;
 }
 
 /*

@@ -27,10 +27,21 @@ private:
 	float linkX;
 	float linkY;
 	bool isCollecting;
-	bool faceLeft;
-	bool faceRight;
-	bool faceUp;
-	bool faceDown;
+	bool facingLeft;
+	bool facingRight;
+	bool facingUp;
+	bool facingDown;
+	bool isAttacking;
+	bool isMoving;
+
+	// Sets his look
+	void FaceUp();
+	void FaceDown();
+	void FaceLeft();
+	void FaceRight();
+	void Attack(float time);
+
+	float attackTimer;
 
 	// Speed of the Dot
 	const float SPEED;
@@ -39,7 +50,11 @@ private:
 	SDL_Rect collider;
 
 	// States used by Link.
-	enum state { IDLE, WALK_LEFT, WALK_RIGHT, WALK_UP, WALK_DOWN, ATK_LEFT, ATK_RIGHT, ATK_UP, ATK_DOWN, PICK_OBJECT, HURT_LEFT, HURT_RIGHT, HURT_UP, HURT_DOWN };
+	enum state { IDLE, WALK_LEFT, WALK_RIGHT, 
+					WALK_UP, WALK_DOWN, ATK_LEFT, 
+					ATK_RIGHT, ATK_UP, ATK_DOWN, 
+					PICK_OBJECT, HURT_LEFT, HURT_RIGHT, 
+					HURT_UP, HURT_DOWN };
 	state currentState;
 
 	void changeState(state newState);
