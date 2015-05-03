@@ -24,6 +24,7 @@ TileManager::~TileManager()
 
 }
 
+// Check for collision
 bool TileManager::TouchesWall(SDL_Rect box, Tile *tiles[TOTAL_TILES])
 {
 	//Go through the tiles
@@ -49,6 +50,7 @@ bool TileManager::TouchesWall(SDL_Rect box, Tile *tiles[TOTAL_TILES])
 	return false;
 }
 
+// setup the map
 bool TileManager::SetTiles(Tile* tiles[TOTAL_TILES])
 {
 	//Success flag
