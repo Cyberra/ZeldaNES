@@ -8,6 +8,8 @@ DotD::DotD()
 	, currentX(0)
 	, currentY(0)
 	, SPEED(100.0f)
+	, lastX(0)
+	, lastY(0)
 {
 	box.w = DOT_WIDTH;
 	box.h = DOT_HEIGHT;
@@ -36,7 +38,7 @@ void DotD::Move(Tile *tiles[TileManager::TOTAL_TILES])
 	if ((box.x < 0) || (box.x + DOT_WIDTH > LEVEL_WIDTH) || TileManager::TouchesWall(box, tiles)) //<---This the function to check collision (TouchesWall)
 	{
 		//move back
-		currentX -= (SPEED * direction.x) * dt + direction.x;
+		currentX = lastX;
 	}
 
 	//Move the dot up or down
@@ -46,8 +48,11 @@ void DotD::Move(Tile *tiles[TileManager::TOTAL_TILES])
 	if ((box.y < 0) || (box.y + DOT_HEIGHT > LEVEL_HEIGHT) || TileManager::TouchesWall(box, tiles))
 	{
 		//move back
-		currentY -= (SPEED * direction.y) * dt + direction.y;
+		currentY = lastY;
 	}
+
+	lastX = currentX;
+	lastY = currentY;
 	SetPosition(currentX, currentY);
 	MoveBox();
 }
@@ -59,7 +64,7 @@ void DotD::MoveBox()
 	box.y = (int)currentY;
 }
 
-// Update Everything!!!!!!!...Player related Indeed
+// Update Everything!!!!!!!
 void DotD::Update()
 {
 	Sprite::Update();

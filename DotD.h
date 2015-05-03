@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-	This is the Test class for the players, it<s the moving Dot on the screen
+	This is the Test class for the players, its the moving Dot on the screen
 	Warning !: All this will be put in Link class at some point
 */
 
@@ -38,5 +38,6 @@ private:
 
 	// Position Shit
 	float currentX, currentY;
+	float lastX, lastY;
 };
 
