@@ -2,6 +2,7 @@
 #include "Libraries.h"
 #include "TileManager.h"
 #include "DotD.h"
+#include "Link.h"
 
 #define SCREEN_LENGTH 1280
 #define SCREEN_HEIGHT 960
@@ -22,7 +23,7 @@ int main(int argc, char* args[])
 
 	TileManager *m = new TileManager();
 	m->SetTiles(TileManager::tiles);
-	DotD *d = new DotD();
+	Link *link = new Link();
 
 	Engine::GetInstance()->Run();
 

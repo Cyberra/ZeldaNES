@@ -8,8 +8,6 @@ DotD::DotD()
 	, currentX(0)
 	, currentY(0)
 	, SPEED(100.0f)
-	, lastX(0)
-	, lastY(0)
 {
 	box.w = DOT_WIDTH;
 	box.h = DOT_HEIGHT;
@@ -52,9 +50,6 @@ void DotD::Move(Tile *tiles[TileManager::TOTAL_TILES])
 		//move back
 		currentY -= (SPEED * direction.y) * dt + direction.y;
 	}
-
-	lastX = currentX;
-	lastY = currentY;
 	SetPosition(currentX, currentY);
 	MoveBox();
 }
