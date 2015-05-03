@@ -27,8 +27,10 @@ DotD::~DotD()
 void DotD::Move(Tile *tiles[TileManager::TOTAL_TILES])
 {
 	Vector2D direction = Vector2D(
-		Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A) ? -1.0f : 0 + Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D) ? 1.0f : 0,
-		Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S) ? 1.0f : 0 + Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W) ? -1.0f : 0);
+		Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A) && !(Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S) || Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W)) ? -1.0f : 0 + 
+		Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D) && !(Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S) || Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W)) ? 1.0f : 0,
+		Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S) && !(Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A) || Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D)) ? 1.0f : 0 + 
+		Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W) && !(Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A) || Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D)) ? -1.0f : 0);
 
 	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
 	//Move the dot left or right
@@ -38,7 +40,7 @@ void DotD::Move(Tile *tiles[TileManager::TOTAL_TILES])
 	if ((box.x < 0) || (box.x + DOT_WIDTH > LEVEL_WIDTH) || TileManager::TouchesWall(box, tiles)) //<---This the function to check collision (TouchesWall)
 	{
 		//move back
-		currentX = lastX;
+		currentX -= (SPEED * direction.x) * dt + direction.x;
 	}
 
 	//Move the dot up or down
@@ -48,7 +50,7 @@ void DotD::Move(Tile *tiles[TileManager::TOTAL_TILES])
 	if ((box.y < 0) || (box.y + DOT_HEIGHT > LEVEL_HEIGHT) || TileManager::TouchesWall(box, tiles))
 	{
 		//move back
-		currentY = lastY;
+		currentY -= (SPEED * direction.y) * dt + direction.y;
 	}
 
 	lastX = currentX;

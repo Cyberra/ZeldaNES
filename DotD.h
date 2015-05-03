@@ -38,6 +38,5 @@ private:
 
 	// Position Shit
 	float currentX, currentY;
-	float lastX, lastY;
 };
 
