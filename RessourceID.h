@@ -8,7 +8,10 @@ namespace Texture
 	{
 		LinkAnims,
 		Dot,
-		Tile
+		Tile,
+		DungeonRoom,
+		Walls,
+		Doors
 	};
 }
 

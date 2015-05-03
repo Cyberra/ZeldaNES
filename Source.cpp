@@ -16,6 +16,9 @@ int main(int argc, char* args[])
 	Textures->LoadTexture(Texture::ID::LinkAnims, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::Dot, "Textures/dot.bmp");
 	Textures->LoadTexture(Texture::ID::Tile, "Textures/tiles.png");
+	Textures->LoadTexture(Texture::ID::DungeonRoom, "Textures/TilesForDungeonMap.png");
+	Textures->LoadTexture(Texture::ID::Walls, "Textures/DungeonWalls.png");
+	Textures->LoadTexture(Texture::ID::Doors, "Textures/DungeonDoors.png");
 	//Textures->LoadTexture(Texture::ID::Level1n1, "Images/MapStuff.png");
 	//Sounds->LoadSound(SE::ID::MarioJump, "SE/MarioJump.mp3");
 	//Musics->LoadMusic(Musiceroni::ID::Music1, "Music/MusicLevel1.mp3");
