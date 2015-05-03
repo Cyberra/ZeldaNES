@@ -36,7 +36,7 @@ void DotD::Move(Tile *tiles[TileManager::TOTAL_TILES])
 	if ((box.x < 0) || (box.x + DOT_WIDTH > LEVEL_WIDTH) || TileManager::TouchesWall(box, tiles))
 	{
 		//move back
-		currentX -= (SPEED * -direction.x) * dt;
+		currentX -= (SPEED * direction.x) * dt;
 	}
 
 	//Move the dot up or down
@@ -46,7 +46,7 @@ void DotD::Move(Tile *tiles[TileManager::TOTAL_TILES])
 	if ((box.y < 0) || (box.y + DOT_HEIGHT > LEVEL_HEIGHT) || TileManager::TouchesWall(box, tiles))
 	{
 		//move back
-		currentY -= (SPEED * -direction.y) * dt;
+		currentY -= (SPEED * direction.y) * dt;
 	}
 	SetPosition(currentX, currentY);
 	MoveBox();
