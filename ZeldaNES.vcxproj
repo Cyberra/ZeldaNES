@@ -80,33 +80,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Level.cpp" />
-    <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="DotD.cpp" />
+    <ClCompile Include="HeartDrop.cpp" />
     <ClCompile Include="Link.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Room01.cpp" />
-    <ClCompile Include="Room02.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileManager.cpp" />
-    <ClCompile Include="ZeldaNES.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Level.h" />
-    <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="DotD.h" />
+    <ClInclude Include="HeartDrop.h" />
     <ClInclude Include="Libraries.h" />
     <ClInclude Include="Link.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="RessourceID.h" />
-    <ClInclude Include="Room01.h" />
-    <ClInclude Include="Room02.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileManager.h" />
-    <ClInclude Include="ZeldaNES.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Room01.map" />
-    <None Include="Room02.map" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

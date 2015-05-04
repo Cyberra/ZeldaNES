@@ -8,6 +8,7 @@ namespace Texture
 	{
 		LinkAnims,
 		Dot,
+		HeartDrop,
 		Tile,
 		DungeonRoom,
 		Walls,
