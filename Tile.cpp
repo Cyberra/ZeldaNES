@@ -12,7 +12,7 @@ Tile::Tile()
 }
 
 Tile::Tile(int tileType)
-	: Sprite(Texture::ID::Tile, { ((tileType / 3) * TILE_WIDTH), ((tileType % 3) * TILE_HEIGHT) }, { TILE_WIDTH, TILE_HEIGHT })
+	: Sprite(Texture::ID::DungeonRoom, { tileType * TILE_WIDTH, 0 }, { TILE_WIDTH, TILE_HEIGHT })
 	, type(tileType)
 	, currentX(0)
 	, currentY(0)

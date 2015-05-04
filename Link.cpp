@@ -14,8 +14,8 @@ Link::Link()
 	//Make it loop
 	this->SetIsLooping(true);
 
-	collider.w = DOT_WIDTH;
-	collider.h = DOT_HEIGHT;
+	collider.w = LINK_WIDTH;
+	collider.h = LINK_HEIGHT;
 
 	collider.x = (int)linkX;
 	collider.y = (int)linkY;
@@ -128,9 +128,10 @@ void Link::Move(Tile *tiles[TileManager::TOTAL_TILES])
 	linkX += (SPEED * direction.x) * dt;
 
 	//If the dot went too far to the left or right or touched a wall
-	if ((collider.x < 0) || (collider.x + DOT_WIDTH > LEVEL_WIDTH) || TileManager::TouchesWall(collider, tiles)) //<---This the function to check collision (TouchesWall)
+	if ((collider.x < 0) || (collider.x + LINK_WIDTH > LEVEL_WIDTH) || TileManager::TouchesWall(collider, tiles)) //<---This the function to check collision (TouchesWall)
 	{
 		//move back
+		std::cout << "Aille!!!!" << std::endl;
 		linkX -= (SPEED * direction.x) * dt + direction.x;
 	}
 
@@ -138,7 +139,7 @@ void Link::Move(Tile *tiles[TileManager::TOTAL_TILES])
 	linkY += (SPEED * direction.y) * dt;
 
 	//If the dot went too far up or down or touched a wall
-	if ((collider.y < 0) || (collider.y + DOT_HEIGHT > LEVEL_HEIGHT) || TileManager::TouchesWall(collider, tiles))
+	if ((collider.y < 0) || (collider.y + LINK_HEIGHT > LEVEL_HEIGHT) || TileManager::TouchesWall(collider, tiles))
 	{
 		//move back
 		linkY -= (SPEED * direction.y) * dt + direction.y;

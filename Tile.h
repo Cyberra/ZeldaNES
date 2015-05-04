@@ -8,18 +8,23 @@
 
 // All the tile types, will change in the real game
 enum tileTypes{
-	TILE_RED = 0,
-	TILE_GREEN,
-	TILE_BLUE,
-	TILE_CENTER,
-	TILE_TOP,
-	TILE_TOPRIGHT,
-	TILE_RIGHT,
-	TILE_BOTTOMRIGHT,
-	TILE_BOTTOM,
-	TILE_BOTTOMLEFT,
-	TILE_LEFT,
-	TILE_TOPLEFT
+	NORMAL = 0,
+	GREEN_BLOCK,
+	ORANGE_BLOCK,
+	BLUE_LEFT_STATUE,
+	BLUE_RIGHT_STATUE,
+	GREY_LEFT_STATUE,
+	GREY_RIGHT_STATUE,
+	STAIRS,
+	WATER,
+	BLACK,
+	ORANGE,
+	DIRT,
+	BLUE_DIRT,
+	LEFT_BOMB_HOLE,
+	RIGHT_BOMB_HOLE,
+	DOWN_BOMB_HOLE,
+	TOP_BOMB_HOLE
 };
 
 class Tile:
@@ -42,8 +47,8 @@ public:
 	void SetBox(int x, int y) { box.x = x, box.y = y; }
 
 	// Size of tile
-	static const int TILE_WIDTH = 80;
-	static const int TILE_HEIGHT = 80;
+	static const int TILE_WIDTH = 16;
+	static const int TILE_HEIGHT = 16;
 
 private:
 	// Collider

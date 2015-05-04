@@ -14,8 +14,8 @@ public:
 	void Update();
 
 	// Size of the Dot collision box
-	static const int DOT_WIDTH = 20;
-	static const int DOT_HEIGHT = 20;
+	static const int LINK_WIDTH = 14;
+	static const int LINK_HEIGHT = 14;
 
 	// Moving Stuff
 	void Move(Tile *tiles[TileManager::TOTAL_TILES]);

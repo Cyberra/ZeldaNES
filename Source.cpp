@@ -19,10 +19,6 @@ int main(int argc, char* args[])
 	Textures->LoadTexture(Texture::ID::DungeonRoom, "Textures/TilesForDungeonMap.png");
 	Textures->LoadTexture(Texture::ID::Walls, "Textures/DungeonWalls.png");
 	Textures->LoadTexture(Texture::ID::Doors, "Textures/DungeonDoors.png");
-	//Textures->LoadTexture(Texture::ID::Level1n1, "Images/MapStuff.png");
-	//Sounds->LoadSound(SE::ID::MarioJump, "SE/MarioJump.mp3");
-	//Musics->LoadMusic(Musiceroni::ID::Music1, "Music/MusicLevel1.mp3");
-	//Fonts->LoadFont(Font::ID::MarioFont, "myFont.ttf", 10);
 
 	TileManager *m = new TileManager();
 	m->SetTiles(TileManager::tiles);
