@@ -10,7 +10,7 @@
 int main(int argc, char* args[])
 {
 	// Initialize the engine
-	Engine::GetInstance()->Init(SCREEN_LENGTH, SCREEN_HEIGHT);
+	Engine::GetInstance()->Init(800, 750, RESOLUTION_NTSC);
 
 	// Loading resources
 	Textures->LoadTexture(Texture::ID::LinkAnims, "Textures/ZeldaSprites.png");
