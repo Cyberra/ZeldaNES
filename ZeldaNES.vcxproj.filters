@@ -51,6 +51,57 @@
     <ClCompile Include="Level.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Room03.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Room04.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Room05.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Room06.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Room07.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Room08.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Room09.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Room10.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Room11.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Room12.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Room13.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Room14.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Room15.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomShop.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomUnderground.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomBoss.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomTriforce.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Libraries.h">
@@ -85,6 +136,57 @@
     </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Room03.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Room04.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Room05.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Room06.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Room07.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Room08.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Room09.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Room10.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Room11.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Room12.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Room13.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Room14.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Room15.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomShop.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomUnderground.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomBoss.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomTriforce.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

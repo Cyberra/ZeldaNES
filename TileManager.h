@@ -17,7 +17,7 @@ class TileManager
 public:
 	// Tiles constants
 	static const int TOTAL_TILES = 84;
-	static const int TOTAL_TILE_SPRITES = 17;
+	static const int TOTAL_TILE_SPRITES = 19;
 
 	TileManager();
 	TileManager(std::string mapPath);
