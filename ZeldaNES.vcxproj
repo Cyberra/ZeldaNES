@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DotD.cpp" />
+    <ClCompile Include="HeartDrop.cpp" />
     <ClCompile Include="Link.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -88,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DotD.h" />
+    <ClInclude Include="HeartDrop.h" />
     <ClInclude Include="Libraries.h" />
     <ClInclude Include="Link.h" />
     <ClInclude Include="RessourceID.h" />

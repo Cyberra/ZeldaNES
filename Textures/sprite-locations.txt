@@ -24,3 +24,5 @@ Aquamentis:	(3, 128) 24x32
 Bomb:		(196, 66) 8x14
 
 Explosion/spawn:(80, 32) 16x16
+
+heart :		(164, 36) 7x8
