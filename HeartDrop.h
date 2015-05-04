@@ -5,6 +5,7 @@
 #include "RessourceID.h"
 #include "PoolObject.h"
 #include "Link.h"
+#include "Rectangle.h"
 
 
 class HeartDrop
@@ -16,18 +17,20 @@ public:
 
 	void Update();
 	//Initializing
-	void Init(const int spawnX, const int spawnY);
+	void Init(const int spawnX, const int spawnY, SDL_Rect link);
 
-	//size of the collision box for Heart.
+	//Collision check
+	bool HeartDrop::LinkIsTouching(SDL_Rect Link);
+
+	//Size of the collision box for Heart.
 	static const int HEART_HEIGHT = 8;
 	static const int HEART_WIDTH = 7;
 
 	//Collider
 	SDL_Rect hCollider;
+	SDL_Rect linkRect;
 
 private:
 	int x, y;
-	//true on hit with link only
-	bool linkIsTouching;
 };
 
