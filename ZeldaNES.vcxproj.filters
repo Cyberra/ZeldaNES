@@ -13,15 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Rooms">
+      <UniqueIdentifier>{e7479e63-112c-48f4-935c-57d4391fd494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Rooms">
+      <UniqueIdentifier>{1dd4c847-0168-44e1-a3bc-150a467acd8c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Link.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="DotD.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
@@ -31,6 +34,21 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="HeartDrop.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Room01.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Room02.cpp">
+      <Filter>Fichiers sources\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ZeldaNES.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,9 +62,6 @@
     <ClInclude Include="Link.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="DotD.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -56,5 +71,28 @@
     <ClInclude Include="HeartDrop.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="Room01.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Room02.h">
+      <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="ZeldaNES.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Room01.map">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="Room02.map">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
   </ItemGroup>
 </Project>
