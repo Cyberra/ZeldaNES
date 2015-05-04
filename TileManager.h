@@ -12,26 +12,25 @@
 #define LEVEL_HEIGHT 112
 
 class TileManager
+	: public Component
 {
 public:
-	TileManager();
-	~TileManager();
-
 	// Tiles constants
 	static const int TOTAL_TILES = 84;
 	static const int TOTAL_TILE_SPRITES = 17;
 
+	TileManager();
+	TileManager(std::string mapPath);
+	~TileManager();
+
+	Tile** GetTiles(){ return tiles; }
+
 	// CheckCollision
-	static bool TouchesWall(SDL_Rect box, Tile* tiles[TOTAL_TILES]);
+	bool TouchesWall(SDL_Rect box);
 
-	// Set the map with a given .map text file NB:See example lazy.map in the folder
-	bool SetTiles(Tile* tiles[TOTAL_TILES]);
-
+protected:
 	// The array of all the tiles 1D for simplicity purpose
-	static Tile *tiles[TOTAL_TILES];
-
-private:
-	
-	
+	Tile *tiles[TOTAL_TILES];
+	bool isInitialized;
 };
 

@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Libraries.h"
-#include "Animation.h"
-#include "TileManager.h"
+#include "Player.h"
+#include "Level.h"
 
 class Link
-	: public Animation
+	: public Player
 {
 public:
 	Link();
@@ -18,12 +18,34 @@ public:
 	static const int LINK_HEIGHT = 14;
 
 	// Moving Stuff
-	void Move(Tile *tiles[TileManager::TOTAL_TILES]);
+	void Enter(Level* room);
+	void Leave(Level* room);
+	void Move(TileManager* tm);
 	void MoveBox();
+
 	
 private:
 
-	// Link stats
+	// Speed of the Dot
+	const float SPEED;
+
+	// States used by Link.
+	enum state {
+		IDLE, WALK_LEFT, WALK_RIGHT,
+		WALK_UP, WALK_DOWN, ATK_LEFT,
+		ATK_RIGHT, ATK_UP, ATK_DOWN,
+		PICK_OBJECT, HURT_LEFT, HURT_RIGHT,
+		HURT_UP, HURT_DOWN
+	};
+
+	// Sets his look
+	void FaceUp();
+	void FaceDown();
+	void FaceLeft();
+	void FaceRight();
+	void Attack(float time);
+
+	float attackTimer;
 	float linkX;
 	float linkY;
 	bool isCollecting;
@@ -34,27 +56,7 @@ private:
 	bool isAttacking;
 	bool isMoving;
 
-	// Sets his look
-	void FaceUp();
-	void FaceDown();
-	void FaceLeft();
-	void FaceRight();
-	void Attack(float time);
-
-	float attackTimer;
-
-	// Speed of the Dot
-	const float SPEED;
-
-	// Collider
 	SDL_Rect collider;
-
-	// States used by Link.
-	enum state { IDLE, WALK_LEFT, WALK_RIGHT, 
-					WALK_UP, WALK_DOWN, ATK_LEFT, 
-					ATK_RIGHT, ATK_UP, ATK_DOWN, 
-					PICK_OBJECT, HURT_LEFT, HURT_RIGHT, 
-					HURT_UP, HURT_DOWN };
 	state currentState;
 
 	void changeState(state newState);

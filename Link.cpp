@@ -1,9 +1,7 @@
-
-
 #include "Link.h"
 
 Link::Link()
-	: Animation(Texture::ID::LinkAnims, WALK_NB_FRAME(), 0, WALK_DOWN_START_SRC(), FRAME_SIZE())
+	: Player(Texture::ID::LinkAnims, WALK_NB_FRAME(), 0, WALK_DOWN_START_SRC(), FRAME_SIZE())
 	, linkX(0)
 	, linkY(0)
 	, SPEED(100.0f)
@@ -113,8 +111,26 @@ void Link::changeState(state newState)
 	}
 }
 
+void Link::Enter(Level* room)
+{
+	for (int i = 0; i < TileManager::TOTAL_TILES; i++)
+	{
+		room->GetTiles()[i]->SetVisible(true);
+	}
+	room->SetPlayer(this);
+}
+
+void Link::Leave(Level* room)
+{
+	room->SetPlayer(nullptr);
+	for (int i = 0; i < TileManager::TOTAL_TILES; i++)
+	{
+		room->GetTiles()[i]->SetVisible(false);
+	}
+}
+
 // Move and check collision
-void Link::Move(Tile *tiles[TileManager::TOTAL_TILES])
+void Link::Move(TileManager* tm)
 {
 	Vector2D direction = Vector2D(
 		Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A) && !(Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S) || Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W)) ? -1.0f : 0 +
@@ -128,7 +144,7 @@ void Link::Move(Tile *tiles[TileManager::TOTAL_TILES])
 	linkX += (SPEED * direction.x) * dt;
 
 	//If the dot went too far to the left or right or touched a wall
-	if ((collider.x < 0) || (collider.x + LINK_WIDTH > LEVEL_WIDTH) || TileManager::TouchesWall(collider, tiles)) //<---This the function to check collision (TouchesWall)
+	if ((collider.x < 0) || (collider.x + LINK_WIDTH > LEVEL_WIDTH) || tm->TouchesWall(collider)) //<---This the function to check collision (TouchesWall)
 	{
 		//move back
 		std::cout << "Aille!!!!" << std::endl;
@@ -139,7 +155,7 @@ void Link::Move(Tile *tiles[TileManager::TOTAL_TILES])
 	linkY += (SPEED * direction.y) * dt;
 
 	//If the dot went too far up or down or touched a wall
-	if ((collider.y < 0) || (collider.y + LINK_HEIGHT > LEVEL_HEIGHT) || TileManager::TouchesWall(collider, tiles))
+	if ((collider.y < 0) || (collider.y + LINK_HEIGHT > LEVEL_HEIGHT) || tm->TouchesWall(collider))
 	{
 		//move back
 		linkY -= (SPEED * direction.y) * dt + direction.y;
@@ -158,10 +174,9 @@ void Link::MoveBox()
 // Update Everything!!!!!!!
 void Link::Update()
 {
-	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
 	Animation::Update();
-	Move(TileManager::tiles);
 
+	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
 
 	//////////////////////////////////////////////
 	// ANIMATIONS

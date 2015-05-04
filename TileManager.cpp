@@ -1,52 +1,12 @@
 #include "TileManager.h"
 
-const int TileManager::TOTAL_TILES;
-const int TileManager::TOTAL_TILE_SPRITES;
-Tile *TileManager::tiles[TileManager::TOTAL_TILES] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, 
-													   nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, 
-													   nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
-													   nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,  
-													   nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
-													   nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
-													   nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
 TileManager::TileManager()
 {
 
 }
 
-TileManager::~TileManager()
-{
-
-}
-
-// Check for collision
-bool TileManager::TouchesWall(SDL_Rect box, Tile *tiles[TOTAL_TILES])
-{
-	//Go through the tiles
-	for (int i = 0; i < TOTAL_TILES; ++i)
-	{
-		//If the tile is a wall type tile
-		if (((tiles[i]->GetType() >= GREEN_BLOCK) && (tiles[i]->GetType() <= GREY_RIGHT_STATUE)) || (tiles[i]->GetType() == WATER))
-		{
-			//std::cout << "Hello wall" << std::endl;
-			//If the collision box touches the wall tile
-			Rectangle *r1 = new Rectangle(box.x, box.y, box.w, box.h);
-			Rectangle *r2 = new Rectangle(tiles[i]->GetBox().x, tiles[i]->GetBox().y, tiles[i]->GetBox().w, tiles[i]->GetBox().h);
-
- 			if (r1->CollidesWith(r2))		
-			{
-				//std::cout << "Hello wall" << std::endl;
-				return true;
-			}
-		}
-	}
-
-	//If no wall tiles were touched
-	return false;
-}
-
-// setup the map
-bool TileManager::SetTiles(Tile* tiles[TOTAL_TILES])
+TileManager::TileManager(std::string mapPath)
+	:isInitialized(false)
 {
 	//Success flag
 	bool tilesLoaded = true;
@@ -55,7 +15,7 @@ bool TileManager::SetTiles(Tile* tiles[TOTAL_TILES])
 	int x = 0, y = 0;
 
 	//Open the map
-	std::ifstream map("Room1.map");
+	std::ifstream map(mapPath);
 
 	//If the map couldn't be loaded
 	if (map.fail())
@@ -117,5 +77,36 @@ bool TileManager::SetTiles(Tile* tiles[TOTAL_TILES])
 	map.close();
 
 	//If the map was loaded fine
-	return tilesLoaded;
+	isInitialized = tilesLoaded;
+}
+
+TileManager::~TileManager()
+{
+
+}
+
+// Check for collision
+bool TileManager::TouchesWall(SDL_Rect box)
+{
+	//Go through the tiles
+	for (int i = 0; i < TOTAL_TILES; ++i)
+	{
+		//If the tile is a wall type tile
+		if (((tiles[i]->GetType() >= GREEN_BLOCK) && (tiles[i]->GetType() <= GREY_RIGHT_STATUE)) || (tiles[i]->GetType() == WATER))
+		{
+			//std::cout << "Hello wall" << std::endl;
+			//If the collision box touches the wall tile
+			Rectangle *r1 = new Rectangle(box.x, box.y, box.w, box.h);
+			Rectangle *r2 = new Rectangle(tiles[i]->GetBox().x, tiles[i]->GetBox().y, tiles[i]->GetBox().w, tiles[i]->GetBox().h);
+
+ 			if (r1->CollidesWith(r2))		
+			{
+				//std::cout << "Hello wall" << std::endl;
+				return true;
+			}
+		}
+	}
+
+	//If no wall tiles were touched
+	return false;
 }
