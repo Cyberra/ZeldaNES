@@ -4,7 +4,7 @@
 RoomTriforce::RoomTriforce()
 	:Level("RoomTriforce.map")
 {
-
+	Hide();
 }
 
 RoomTriforce::~RoomTriforce()

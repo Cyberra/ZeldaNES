@@ -4,7 +4,7 @@
 Room07::Room07()
 	:Level("Room07.map")
 {
-
+	Hide();
 }
 
 Room07::~Room07()

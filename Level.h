@@ -9,7 +9,7 @@ class Level
 public:
 	// Ctor / Dtor
 	Level();
-	Level(std::string mapPath);
+	Level(const std::string mapPath);
 	virtual ~Level();
 
 	// Getter / Setter
@@ -17,6 +17,10 @@ public:
 	
 	// Virtuals
 	void Update();
+
+	// Locals
+	void Show();
+	void Hide();
 
 protected:
 	Player* player;
