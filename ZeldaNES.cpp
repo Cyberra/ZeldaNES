@@ -3,6 +3,7 @@
 ZeldaNES::ZeldaNES()
 {
 	// Loading resources
+	//Sounds
 	Sounds->LoadSound(Sound::ID::Arrow, "SFX/Arrow.wav");
 	Sounds->LoadSound(Sound::ID::DropBomb, "SFX/BombDrop.wav");
 	Sounds->LoadSound(Sound::ID::Boomerang, "SFX/Boomerang.wav");
@@ -26,6 +27,8 @@ ZeldaNES::ZeldaNES()
 	Sounds->LoadSound(Sound::ID::Sword, "SFX/Sword.wav");
 	Sounds->LoadSound(Sound::ID::SwordShot, "SFX/SwordShoot.wav");
 	Sounds->LoadSound(Sound::ID::CombinShot, "SFX/SwordCombined.wav");
+
+	//Textures
 	Textures->LoadTexture(Texture::ID::LinkAnims, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::Dot, "Textures/dot.bmp");
 	Textures->LoadTexture(Texture::ID::Tile, "Textures/tiles.png");
@@ -36,11 +39,29 @@ ZeldaNES::ZeldaNES()
 	// Render order
 	rooms[0] = new Room01();
 	rooms[1] = new Room02();
+	rooms[2] = new Room03();
+	rooms[3] = new Room04();
+	rooms[4] = new Room05();
+	rooms[5] = new Room06();
+	rooms[6] = new Room07();
+	rooms[7] = new Room08();
+	rooms[8] = new Room09();
+	rooms[9] = new Room10();
+	rooms[10] = new Room11();
+	rooms[11] = new Room12();
+	rooms[12] = new Room13();
+	rooms[13] = new Room14();
+	rooms[14] = new Room15();
+	rooms[15] = new RoomBoss();
+	rooms[16] = new RoomShop();
+	rooms[17] = new RoomTriforce();
+	rooms[18] = new RoomUnderground();
+
 	link = new Link();
 
 	// Initialise game
 	link->Enter(rooms[0]);
-
+	link->Leave(rooms[1]);
 }
 
 ZeldaNES::~ZeldaNES()
@@ -55,16 +76,16 @@ void ZeldaNES::Start()
 
 void ZeldaNES::Update()
 {
-	//if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_1))
-	//{
-	//	link->Leave(rooms[1]);
-	//	link->Enter(rooms[0]);
-	//}
-	//else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_2))
-	//{
-	//	link->Leave(rooms[0]);
-	//	link->Enter(rooms[1]);
-	//}
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_1))
+	{
+		link->Leave(rooms[1]);
+		link->Enter(rooms[0]);
+	}
+	else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_2))
+	{
+		link->Leave(rooms[0]);
+		link->Enter(rooms[1]);
+	}
 }
 
 void ZeldaNES::Stop()

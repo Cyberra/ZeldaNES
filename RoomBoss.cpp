@@ -4,7 +4,7 @@
 RoomBoss::RoomBoss()
 	:Level("RoomBoss.map")
 {
-
+	Hide();
 }
 
 RoomBoss::~RoomBoss()
