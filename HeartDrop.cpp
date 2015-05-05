@@ -2,7 +2,7 @@
 
 
 HeartDrop::HeartDrop()
-	:Sprite(Texture::ID::HeartDrop, point<int>(164, 36), point<int>(8, 7))
+	:Sprite(Texture::ID::HeartDrop, point<int>(164, 36)/*SRC*/, point<int>(HEART_HEIGHT, HEART_WIDTH))
 {
 }
 
@@ -42,10 +42,11 @@ bool HeartDrop::LinkIsTouching(SDL_Rect linkRect)
 	Rectangle* r2 = new Rectangle(linkRect.x, linkRect.y, linkRect.w, linkRect.h);
 	if (r1->CollidesWith(r2))
 	{
-		return true;
+		isTouched = true;
 	}
 	else
 	{
-		return false;
+		isTouched = false;
 	}
+	return isTouched;
 }

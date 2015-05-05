@@ -3,6 +3,8 @@
 #include "Libraries.h"
 #include "Player.h"
 #include "Level.h"
+#include "Pool.h"
+#include "Boomerang.h"
 
 class Link
 	: public Player
@@ -23,6 +25,7 @@ public:
 	void Move(TileManager* tm);
 	void MoveBox();
 
+	bool isAttacking;
 	
 private:
 
@@ -53,8 +56,10 @@ private:
 	bool facingRight;
 	bool facingUp;
 	bool facingDown;
-	bool isAttacking;
 	bool isMoving;
+
+	Pool<Boomerang>* boomerangPool;
+	Boomerang* actualBoomerang;
 
 	SDL_Rect collider;
 	state currentState;
@@ -65,6 +70,7 @@ private:
 	const int HURT_NB_FRAME()					{ return 2; }
 	const int ATK_NB_FRAME()					{ return 1; }
 	const int PICKUP_NB_FRAME()					{ return 1; }
+	const int BOOMERANG_NB_FRAME()				{ return 4; }
 
 	const point<int> FRAME_SIZE()				{ return{ 16, 16 }; };
 	const point<int> WALK_LEFT_START_SRC()		{ return{ 0, 0 }; };
@@ -80,5 +86,6 @@ private:
 	const point<int> HURT_UP_START_SRC()		{ return{ 16, 32 }; };
 	const point<int> HURT_DOWN_START_SRC()		{ return{ 48, 32 }; };
 	const point<int> PICK_OBJECT_START_SRC()	{ return{ 64, 48 }; };
+	const point<int> BOOMERANG_START_SRC()		{ return{ 16, 16 }; };
 };
 

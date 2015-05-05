@@ -102,6 +102,12 @@
     <ClCompile Include="RoomTriforce.cpp">
       <Filter>Fichiers sources\Rooms</Filter>
     </ClCompile>
+    <ClCompile Include="Boomerang.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Libraries.h">
@@ -187,6 +193,12 @@
     </ClInclude>
     <ClInclude Include="RoomTriforce.h">
       <Filter>Fichiers d%27en-tête\Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Boomerang.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

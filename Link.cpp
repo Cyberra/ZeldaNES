@@ -6,6 +6,8 @@ Link::Link()
 	, linkY(0)
 	, SPEED(100.0f)
 	, attackTimer(0.0f)
+	, boomerangPool(nullptr)
+	, actualBoomerang(nullptr)
 {
 	//Start the animation on creation
 	this->Play();
@@ -21,7 +23,8 @@ Link::Link()
 
 Link::~Link()
 {
-
+	delete boomerangPool;
+	boomerangPool = nullptr;
 }
 
 void Link::changeState(state newState)
