@@ -9,9 +9,11 @@ class Objects :
 public:
 	Objects();
 	Objects(Texture::ID id, int nbFrame, int animSpeed, const point<int> src, const point<int> size);
-	virtual ~Objects();
+	
+	virtual void Move() = 0;
+	virtual void Show() = 0;
+	virtual void Clear() = 0;
 
-	void Clear();
-	void Move();
+	virtual ~Objects();
 };
 

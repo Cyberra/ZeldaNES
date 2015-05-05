@@ -36,7 +36,7 @@ void Boomerang::Clear()
 	isVisible = false;
 }
 
-void Boomerang::MoveBoomerang()
+void Boomerang::Move()
 {
 
 }
