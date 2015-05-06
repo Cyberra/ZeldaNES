@@ -2,7 +2,6 @@
 
 Link::Link()
 	: Player(Texture::ID::LinkAnims, WALK_NB_FRAME(), 0, WALK_DOWN_START_SRC(), FRAME_SIZE())
-	, name("")
 	, linkX(820)
 	, linkY(954)
 	, SPEED(100.0f)
@@ -13,9 +12,9 @@ Link::Link()
 {
 	SetPosition(linkX, linkY);
 
-	// Start the animation on creation
+	//Start the animation on creation
 	this->Play();
-	// Make it loop
+	//Make it loop
 	this->SetIsLooping(true);
 
 	collider.w = LINK_WIDTH;
@@ -35,9 +34,9 @@ Link::~Link()
 
 void Link::changeState(state newState)
 {
-	///////////////////////////////////////////
-	// INSERT CASES FOR EACH ANIMS DOWN HERE //
-	///////////////////////////////////////////
+	//////////////////////////////////////////////
+	// INSERT CASES FOR EACH ANIMS DOWN HERE
+	//////////////////////////////////////////////
 
 	if (this->currentState != newState)
 	{
@@ -120,6 +119,16 @@ void Link::changeState(state newState)
 	}
 }
 
+point<float> Link::GetNextPos(const Vector2D &direction)
+{
+	point<float> p;
+
+	p.x = linkX + direction.x;
+	p.y = linkY + direction.y;
+
+	return p;
+}
+
 void Link::Enter(Level* room)
 {
 	actualRoom = room;
@@ -137,10 +146,10 @@ void Link::Leave(Level* room)
 void Link::Move(TileManager* tm)
 {
 	Vector2D direction = Vector2D(
-		ThisKeyHeld(SDL_SCANCODE_A) && !(ThisKeyHeld(SDL_SCANCODE_S) || ThisKeyHeld(SDL_SCANCODE_W)) ? -1.0f : 0 +
-		ThisKeyHeld(SDL_SCANCODE_D) && !(ThisKeyHeld(SDL_SCANCODE_S) || ThisKeyHeld(SDL_SCANCODE_W)) ? 1.0f : 0,
-		ThisKeyHeld(SDL_SCANCODE_S) && !(ThisKeyHeld(SDL_SCANCODE_A) || ThisKeyHeld(SDL_SCANCODE_D)) ? 1.0f : 0 +
-		ThisKeyHeld(SDL_SCANCODE_W) && !(ThisKeyHeld(SDL_SCANCODE_A) || ThisKeyHeld(SDL_SCANCODE_D)) ? -1.0f : 0);
+		Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A) && !(Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S) || Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W)) ? -1.0f : 0 +
+		Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D) && !(Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S) || Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W)) ? 1.0f : 0,
+		Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S) && !(Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A) || Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D)) ? 1.0f : 0 +
+		Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W) && !(Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A) || Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D)) ? -1.0f : 0);
 
 	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
 
@@ -191,7 +200,7 @@ void Link::Update()
 	//////////////////////////////////////////////
 
 	// W
-	if (ThisKeyHeld(SDL_SCANCODE_W))
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W))
 	{
 		FaceUp();
 		changeState(WALK_UP);
@@ -199,7 +208,7 @@ void Link::Update()
 	}
 
 	// A
-	if (ThisKeyHeld(SDL_SCANCODE_A))
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A))
 	{
 		FaceLeft();
 		changeState(WALK_LEFT);
@@ -207,7 +216,7 @@ void Link::Update()
 	}
 
 	// S
-	if (ThisKeyHeld(SDL_SCANCODE_S))
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S))
 	{
 		FaceDown();
 		changeState(WALK_DOWN);
@@ -215,15 +224,17 @@ void Link::Update()
 	}
 
 	// D
-	if (ThisKeyHeld(SDL_SCANCODE_D))
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D))
 	{
 		FaceRight();
 		changeState(WALK_RIGHT);
 		isMoving = true;
 	}
 
-	if (ThisKeyReleased(SDL_SCANCODE_D) || ThisKeyReleased(SDL_SCANCODE_S) ||
-		ThisKeyReleased(SDL_SCANCODE_A) || ThisKeyReleased(SDL_SCANCODE_W))
+	if		(Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_D) ||
+			 Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_S) ||
+			 Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_A) ||
+			 Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_W)	)
 	{
 		isMoving = false;
 	}
@@ -234,19 +245,19 @@ void Link::Update()
 	}
 	
 	// L
-	if (ThisKeyHeld(SDL_SCANCODE_L) && facingLeft)
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && facingLeft)
 	{
 		changeState(ATK_LEFT);
 	}
-	if (ThisKeyHeld(SDL_SCANCODE_L) && facingRight)
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && facingRight)
 	{
 		changeState(ATK_RIGHT);
 	}
-	if (ThisKeyHeld(SDL_SCANCODE_L) && facingUp)
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && facingUp)
 	{
 		changeState(ATK_UP);
 	}
-	if (ThisKeyHeld(SDL_SCANCODE_L) && facingDown)
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && facingDown)
 	{
 		changeState(ATK_DOWN);
 	}
@@ -255,22 +266,22 @@ void Link::Update()
 		isAttacking = true;
 	}
 
-	if (!ThisKeyHeld(SDL_SCANCODE_L) && !ThisKeyHeld(SDL_SCANCODE_A) && facingLeft)
+	if (!Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && !Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A) && facingLeft)
 	{
 		changeState(WALK_LEFT);
 		changeState(IDLE);
 	}
-	if (!ThisKeyHeld(SDL_SCANCODE_L) && !ThisKeyHeld(SDL_SCANCODE_D) && facingRight)
+	if (!Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && !Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D) && facingRight)
 	{
 		changeState(WALK_RIGHT);
 		changeState(IDLE);
 	}
-	if (!ThisKeyHeld(SDL_SCANCODE_L) && !ThisKeyHeld(SDL_SCANCODE_W) && facingUp)
+	if (!Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && !Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W) && facingUp)
 	{
 		changeState(WALK_UP);
 		changeState(IDLE);
 	}
-	if (!ThisKeyHeld(SDL_SCANCODE_L) && !ThisKeyHeld(SDL_SCANCODE_S) && facingDown)
+	if (!Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_L) && !Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S) && facingDown)
 	{
 		changeState(WALK_DOWN);
 		changeState(IDLE);
@@ -341,28 +352,28 @@ void Link::Update()
 	//////////////////////////////////////////////
 
 	// W
-	if (ThisKeyHeld(SDL_SCANCODE_W))
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W))
 	{
 		changeState(WALK_UP);
 		linkY--;
 	}
 
 	// A
-	if (ThisKeyHeld(SDL_SCANCODE_A))
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A))
 	{
 		changeState(WALK_LEFT);
 		linkX--;
 	}
 
 	// S
-	if (ThisKeyHeld(SDL_SCANCODE_S))
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S))
 	{
 		changeState(WALK_DOWN);
 		linkY++;
 	}
 
 	// D
-	if (ThisKeyHeld(SDL_SCANCODE_D))
+	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D))
 	{
 		changeState(WALK_RIGHT);
 		linkX++;

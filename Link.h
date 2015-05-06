@@ -18,6 +18,9 @@ public:
 	// Getter
 	Level const *GetRoom() { return actualRoom; }
 
+	point<float> GetNextPos(const Vector2D &direction);
+
+
 	// Size of the Dot collision box
 	static const int LINK_WIDTH = 14;
 	static const int LINK_HEIGHT = 14;
@@ -35,25 +38,13 @@ private:
 	// Speed of the Dot
 	const float SPEED;
 
-	// Name
-	std::string name;
-
 	// States used by Link.
 	enum state {
-		IDLE, 
-		WALK_LEFT, 
-		WALK_RIGHT,
-		WALK_UP, 
-		WALK_DOWN, 
-		ATK_LEFT,
-		ATK_RIGHT, 
-		ATK_UP, 
-		ATK_DOWN,
-		PICK_OBJECT, 
-		HURT_LEFT, 
-		HURT_RIGHT,
-		HURT_UP, 
-		HURT_DOWN
+		IDLE, WALK_LEFT, WALK_RIGHT,
+		WALK_UP, WALK_DOWN, ATK_LEFT,
+		ATK_RIGHT, ATK_UP, ATK_DOWN,
+		PICK_OBJECT, HURT_LEFT, HURT_RIGHT,
+		HURT_UP, HURT_DOWN
 	};
 
 	// Sets his look
