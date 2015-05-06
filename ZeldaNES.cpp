@@ -38,6 +38,8 @@ ZeldaNES::ZeldaNES()
 	Textures->LoadTexture(Texture::ID::DungeonRoom, "Textures/TilesForDungeonMap.png");
 	Textures->LoadTexture(Texture::ID::Walls, "Textures/DungeonWalls.png");
 	Textures->LoadTexture(Texture::ID::Doors, "Textures/DungeonDoors.png");
+	Textures->LoadTexture(Texture::ID::Triforce, "Textures/ZeldaSprites.png");
+	Textures->LoadTexture(Texture::ID::HeartDrop, "Textures/ZeldaSprites.png");
 
 	// Render order
 	rooms[0] = new Room01();

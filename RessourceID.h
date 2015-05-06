@@ -13,7 +13,8 @@ namespace Texture
 		DungeonRoom,
 		Walls,
 		Doors,
-		Triforce
+		Triforce,
+		OpeningAnim
 	};
 }
 namespace Sound
