@@ -14,5 +14,6 @@ public:
 
 private:
 	Text* titleText;
+	Animation* background;
 };
 
