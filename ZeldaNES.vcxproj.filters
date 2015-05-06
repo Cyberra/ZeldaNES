@@ -87,9 +87,6 @@
     <ClCompile Include="Room14.cpp">
       <Filter>Fichiers sources\Rooms</Filter>
     </ClCompile>
-    <ClCompile Include="Room15.cpp">
-      <Filter>Fichiers sources\Rooms</Filter>
-    </ClCompile>
     <ClCompile Include="RoomShop.cpp">
       <Filter>Fichiers sources\Rooms</Filter>
     </ClCompile>
@@ -177,9 +174,6 @@
       <Filter>Fichiers d%27en-tête\Rooms</Filter>
     </ClInclude>
     <ClInclude Include="Room14.h">
-      <Filter>Fichiers d%27en-tête\Rooms</Filter>
-    </ClInclude>
-    <ClInclude Include="Room15.h">
       <Filter>Fichiers d%27en-tête\Rooms</Filter>
     </ClInclude>
     <ClInclude Include="RoomShop.h">

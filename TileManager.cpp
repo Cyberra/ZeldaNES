@@ -5,6 +5,120 @@ TileManager::TileManager()
 
 }
 
+point<int> TileManager::GetOffSet(const std::string map)
+{
+	point<int> offSet;
+	
+	if (map == "Room01.map")
+	{
+		offSet.x = 732; 
+		offSet.y = 864;
+	}
+
+	else if (map == "Room02.map")
+	{
+		offSet.x = 492;
+		offSet.y = 864;
+	}
+
+	else if (map == "Room03.map")
+	{
+		offSet.x = 972;
+		offSet.y = 864;
+	}
+
+	else if (map == "Room04.map")
+	{
+		offSet.x = 732;
+		offSet.y = 704;
+	}
+
+	else if (map == "Room05.map")
+	{
+		offSet.x = 492;
+		offSet.y = 544;
+	}
+
+	else if (map == "Room06.map")
+	{
+		offSet.x = 732;
+		offSet.y = 544;
+	}
+
+	else if (map == "Room07.map")
+	{
+		offSet.x = 972;
+		offSet.y = 544;
+	}
+
+	else if (map == "Room08.map")
+	{
+		offSet.x = 492;
+		offSet.y = 384;
+	}
+
+	else if (map == "Room09.map")
+	{
+		offSet.x = 732;
+		offSet.y = 384;
+	}
+
+	else if (map == "Room10.map")
+	{
+		offSet.x = 972;
+		offSet.y = 384;
+	}
+
+	else if (map == "Room11.map")
+	{
+		offSet.x = 1212;
+		offSet.y = 384;
+	}
+
+	else if (map == "Room12.map")
+	{
+		offSet.x = 732;
+		offSet.y = 224;
+	}
+
+	else if (map == "Room13.map")
+	{
+		offSet.x = 732;
+		offSet.y = 64;
+	}
+
+	else if (map == "Room14.map")
+	{
+		offSet.x = 492;
+		offSet.y = 64;
+	}
+
+	else if (map == "RoomBoss.map")
+	{
+		offSet.x = 1212;
+		offSet.y = 224;
+	}
+
+	else if (map == "RoomShop.map")
+	{
+		offSet.x = 252;
+		offSet.y = 384;
+	}
+
+	else if (map == "RoomTriforce.map")
+	{
+		offSet.x = 1452;
+		offSet.y = 224;
+	}
+
+	else if (map == "RoomUnderground.map")
+	{
+		offSet.x = 252;
+		offSet.y = 64;
+	}
+	return offSet;
+}
+
 TileManager::TileManager(std::string mapPath)
 	:isInitialized(false)
 {
@@ -12,7 +126,14 @@ TileManager::TileManager(std::string mapPath)
 	bool tilesLoaded = true;
 
 	//The tile offsets
-	int x = 0, y = 0;
+	point<int> offSet = GetOffSet(mapPath);
+	int x = offSet.x, y = offSet.y;
+	
+	if (mapPath != "RoomUnderground.map")
+	{
+		Sprite *wall = new Sprite(Texture::ID::Walls);
+		wall->SetPosition(x - 24, y - 24);
+	}
 
 	//Open the map
 	std::ifstream map(mapPath);
@@ -50,6 +171,7 @@ TileManager::TileManager(std::string mapPath)
 				tiles[i] = new Tile(tileType);
 				tiles[i]->SetPosition(x, y);
 				tiles[i]->SetBox(x, y);
+				std::cout << tiles[i]->GetBox().x << ", " << tiles[i]->GetBox().y << std::endl;
 			}
 			//If we don't recognize the tile type
 			else
@@ -63,13 +185,13 @@ TileManager::TileManager(std::string mapPath)
 			x += Tile::TILE_WIDTH;
 
 			//If we've gone too far
-			if (x >= LEVEL_WIDTH)
+			if (x >= LEVEL_WIDTH + offSet.x)
 			{
 				//Move back
-				x = 0;
+				x = offSet.x;
 
 				//Move to the next row
-				y += Tile::TILE_HEIGHT;
+				y += Tile::TILE_HEIGHT ;
 			}
 		}
 	}

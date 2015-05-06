@@ -100,7 +100,6 @@
     <ClCompile Include="Room12.cpp" />
     <ClCompile Include="Room13.cpp" />
     <ClCompile Include="Room14.cpp" />
-    <ClCompile Include="Room15.cpp" />
     <ClCompile Include="RoomBoss.cpp" />
     <ClCompile Include="RoomShop.cpp" />
     <ClCompile Include="RoomTriforce.cpp" />
@@ -133,7 +132,6 @@
     <ClInclude Include="Room12.h" />
     <ClInclude Include="Room13.h" />
     <ClInclude Include="Room14.h" />
-    <ClInclude Include="Room15.h" />
     <ClInclude Include="RoomBoss.h" />
     <ClInclude Include="RoomShop.h" />
     <ClInclude Include="RoomTriforce.h" />

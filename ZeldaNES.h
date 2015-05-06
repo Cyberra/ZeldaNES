@@ -15,7 +15,6 @@
 #include "Room12.h"
 #include "Room13.h"
 #include "Room14.h"
-#include "Room15.h"
 #include "RoomBoss.h"
 #include "RoomShop.h"
 #include "RoomTriforce.h"
@@ -34,7 +33,7 @@ public:
 
 	void TravelTo(Level* prevRoom, Level* nextRoom, const int direction);
 private:
-
+	Level *actualRoom;
 	Level* rooms[18];
 	Link *link;
 };

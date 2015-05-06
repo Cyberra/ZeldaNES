@@ -7,6 +7,7 @@ Level::Level()
 Level::Level(const std::string mapPath)
 	: TileManager(mapPath)
 	, player(nullptr)
+
 {
 
 }

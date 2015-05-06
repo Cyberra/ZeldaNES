@@ -2,14 +2,16 @@
 
 Link::Link()
 	: Player(Texture::ID::LinkAnims, WALK_NB_FRAME(), 0, WALK_DOWN_START_SRC(), FRAME_SIZE())
-	, linkX(0)
-	, linkY(0)
+	, linkX(820)
+	, linkY(954)
 	, SPEED(100.0f)
 	, attackTimer(0.0f)
 	, boomerangPool(nullptr)
 	, actualBoomerang(nullptr)
 	, actualRoom(nullptr)
 {
+	SetPosition(linkX, linkY);
+
 	//Start the animation on creation
 	this->Play();
 	//Make it loop
@@ -144,11 +146,15 @@ void Link::Move(TileManager* tm)
 	//Move the dot left or right
 	linkX += (SPEED * direction.x) * dt;
 
+	/*
+		WARNING!!!!!! -> Collision is not totaly working, the wall is not working AT ALL! So you can go wherever you want ! and the object collision is floppy.
+	*/
+
 	//If the dot went too far to the left or right or touched a wall
-	if ((collider.x < 0) || (collider.x + LINK_WIDTH > LEVEL_WIDTH) || tm->TouchesWall(collider)) //<---This the function to check collision (TouchesWall)
+	if (tm->TouchesWall(collider)) //<---This the function to check collision (TouchesWall)
 	{
 		//move back
-		std::cout << "Aille!!!!" << std::endl;
+		//std::cout << "Aille!!!!" << std::endl;
 		linkX -= (SPEED * direction.x) * dt + direction.x;
 	}
 
@@ -156,7 +162,7 @@ void Link::Move(TileManager* tm)
 	linkY += (SPEED * direction.y) * dt;
 
 	//If the dot went too far up or down or touched a wall
-	if ((collider.y < 0) || (collider.y + LINK_HEIGHT > LEVEL_HEIGHT) || tm->TouchesWall(collider))
+	if (tm->TouchesWall(collider))
 	{
 		//move back
 		linkY -= (SPEED * direction.y) * dt + direction.y;

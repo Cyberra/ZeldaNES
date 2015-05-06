@@ -6,8 +6,4 @@ class Room02 :
 public:
 	Room02();
 	~Room02();
-
-	void Update()
-	{
-	}
 };

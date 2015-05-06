@@ -3,13 +3,13 @@
 #include "ZeldaNES.h"
 
 
-#define SCREEN_LENGTH 1280
-#define SCREEN_HEIGHT 960
+#define SCREEN_LENGTH 2000
+#define SCREEN_HEIGHT 1000
 
 int main(int argc, char* args[])
 {
 	// Initialize the engine
-	Engine::GetInstance()->Init(800, 750, RESOLUTION_NTSC);
+	Engine::GetInstance()->Init(SCREEN_LENGTH, SCREEN_HEIGHT);
 
 	ZeldaNES* zeldaNES = new ZeldaNES();
 

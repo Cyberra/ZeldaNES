@@ -23,6 +23,10 @@ public:
 	TileManager(std::string mapPath);
 	~TileManager();
 
+	// Locals
+	point<int> GetOffSet(const std::string map);
+
+	// Getters
 	Tile** GetTiles(){ return tiles; }
 
 	// CheckCollision

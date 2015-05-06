@@ -24,5 +24,4 @@ public:
 
 protected:
 	Player* player;
-
 };

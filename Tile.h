@@ -56,10 +56,6 @@ private:
 	// Collider
 	SDL_Rect box;
 
-	// position Stuff
-	int currentX;
-	int currentY;
-
 	// What is that tile 
 	int type;
 };

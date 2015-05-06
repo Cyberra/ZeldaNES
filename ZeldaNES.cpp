@@ -51,15 +51,15 @@ ZeldaNES::ZeldaNES()
 	rooms[11] = new Room12();
 	rooms[12] = new Room13();
 	rooms[13] = new Room14();
-	rooms[14] = new Room15();
-	rooms[15] = new RoomBoss();
-	rooms[16] = new RoomShop();
-	rooms[17] = new RoomTriforce();
-	rooms[18] = new RoomUnderground();
+	rooms[14] = new RoomBoss();
+	rooms[15] = new RoomShop();
+	rooms[16] = new RoomTriforce();
+	rooms[17] = new RoomUnderground();
 
 	link = new Link();
 
 	// Initialise game
+	actualRoom = rooms[0];
 	link->Enter(rooms[0]);
 	link->Leave(rooms[1]);
 }
@@ -76,12 +76,71 @@ void ZeldaNES::Start()
 
 void ZeldaNES::Update()
 {
+	// Press the associated number to see all Room.
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_Q))
+	{
+		TravelTo(actualRoom, rooms[0], 0);
+		actualRoom = rooms[0];
+	}
+
 	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_1))
 	{
-		if (link->GetRoom() == rooms[0])
-		{
-			TravelTo(rooms[0], rooms[9], 0);
-		}
+		TravelTo(actualRoom, rooms[1], 0);
+		actualRoom = rooms[1];
+	}
+
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_2))
+	{
+		TravelTo(actualRoom, rooms[2], 0);
+		actualRoom = rooms[2];
+	}
+
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_3))
+	{
+		TravelTo(actualRoom, rooms[3], 0);
+		actualRoom = rooms[3];
+	}
+
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_4))
+	{
+		TravelTo(actualRoom, rooms[4], 0);
+		actualRoom = rooms[4];
+	}
+
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_5))
+	{
+		TravelTo(actualRoom, rooms[5], 0);
+		actualRoom = rooms[5];
+	}
+
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_6))
+	{
+		TravelTo(actualRoom, rooms[6], 0);
+		actualRoom = rooms[6];
+	}
+
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_7))
+	{
+		TravelTo(actualRoom, rooms[7], 0);
+		actualRoom = rooms[7];
+	}
+
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_8))
+	{
+		TravelTo(actualRoom, rooms[8], 0);
+		actualRoom = rooms[8];
+	}
+
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_9))
+	{
+		TravelTo(actualRoom, rooms[9], 0);
+		actualRoom = rooms[9];
+	}
+
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_0))
+	{
+		TravelTo(actualRoom, rooms[10], 0);
+		actualRoom = rooms[10];
 	}
 }
 
