@@ -18,7 +18,7 @@ public:
 	// Getter
 	Level const *GetRoom() { return actualRoom; }
 
-	point<float> GetNextPos(const Vector2D &direction);
+	point<int> GetNextPos(const Vector2D &direction);
 
 
 	// Size of the Dot collision box
@@ -29,7 +29,7 @@ public:
 	void Enter(Level* room);
 	void Leave(Level* room);
 	void Move(TileManager* tm);
-	void MoveBox();
+	void MoveBox(const Vector2D &direction);
 
 	bool isAttacking;
 	

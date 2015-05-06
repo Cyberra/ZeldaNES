@@ -21,7 +21,7 @@ Link::Link()
 	collider.h = LINK_HEIGHT;
 
 	collider.x = (int)linkX;
-	collider.y = (int)linkY;
+	collider.y = (int)linkY + LINK_HEIGHT/2;
 }
 
 Link::~Link()
@@ -119,9 +119,9 @@ void Link::changeState(state newState)
 	}
 }
 
-point<float> Link::GetNextPos(const Vector2D &direction)
+point<int> Link::GetNextPos(const Vector2D &direction)
 {
-	point<float> p;
+	point<int> p;
 
 	p.x = linkX + direction.x;
 	p.y = linkY + direction.y;
@@ -153,6 +153,8 @@ void Link::Move(TileManager* tm)
 
 	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
 
+	MoveBox(direction);
+
 	//Move the dot left or right
 	linkX += (SPEED * direction.x) * dt;
 
@@ -178,14 +180,13 @@ void Link::Move(TileManager* tm)
 		linkY -= (SPEED * direction.y) * dt + direction.y;
 	}
 	SetPosition(linkX, linkY);
-	MoveBox();
 }
 
 // Move the collider
-void Link::MoveBox()
+void Link::MoveBox(const Vector2D &direction)
 {
-	collider.x = (int)linkX;
-	collider.y = (int)linkY;
+	collider.x = GetNextPos(direction).x;
+	collider.y = GetNextPos(direction).y;
 }
 
 // Update Everything!!!!!!!
