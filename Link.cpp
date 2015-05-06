@@ -8,6 +8,7 @@ Link::Link()
 	, attackTimer(0.0f)
 	, boomerangPool(nullptr)
 	, actualBoomerang(nullptr)
+	, actualRoom(nullptr)
 {
 	//Start the animation on creation
 	this->Play();
@@ -23,8 +24,10 @@ Link::Link()
 
 Link::~Link()
 {
+	delete actualRoom;
 	delete boomerangPool;
 	boomerangPool = nullptr;
+	actualRoom = nullptr;
 }
 
 void Link::changeState(state newState)
@@ -116,20 +119,15 @@ void Link::changeState(state newState)
 
 void Link::Enter(Level* room)
 {
-	for (int i = 0; i < TileManager::TOTAL_TILES; i++)
-	{
-		room->GetTiles()[i]->SetVisible(true);
-	}
+	actualRoom = room;
+	room->Show();
 	room->SetPlayer(this);
 }
 
 void Link::Leave(Level* room)
 {
 	room->SetPlayer(nullptr);
-	for (int i = 0; i < TileManager::TOTAL_TILES; i++)
-	{
-		room->GetTiles()[i]->SetVisible(false);
-	}
+	room->Hide();
 }
 
 // Move and check collision

@@ -15,6 +15,9 @@ public:
 
 	void Update();
 
+	// Getter
+	Level const *GetRoom() { return actualRoom; }
+
 	// Size of the Dot collision box
 	static const int LINK_WIDTH = 14;
 	static const int LINK_HEIGHT = 14;
@@ -57,6 +60,8 @@ private:
 	bool facingUp;
 	bool facingDown;
 	bool isMoving;
+
+	Level *actualRoom;
 
 	Pool<Boomerang>* boomerangPool;
 	Boomerang* actualBoomerang;

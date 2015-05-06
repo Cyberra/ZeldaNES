@@ -78,13 +78,10 @@ void ZeldaNES::Update()
 {
 	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_1))
 	{
-		link->Leave(rooms[1]);
-		link->Enter(rooms[0]);
-	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_2))
-	{
-		link->Leave(rooms[0]);
-		link->Enter(rooms[1]);
+		if (link->GetRoom() == rooms[0])
+		{
+			TravelTo(rooms[0], rooms[9], 0);
+		}
 	}
 }
 
@@ -93,7 +90,8 @@ void ZeldaNES::Stop()
 
 }
 
-void ZeldaNES::TravelTo(Level* prevRoom, Level* nextRoom)
+void ZeldaNES::TravelTo(Level* prevRoom, Level* nextRoom, const int direction)
 {
-
+	link->Leave(prevRoom);
+	link->Enter(nextRoom);
 }
