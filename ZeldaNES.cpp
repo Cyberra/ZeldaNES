@@ -28,6 +28,9 @@ ZeldaNES::ZeldaNES()
 	Sounds->LoadSound(Sound::ID::SwordShot, "SFX/SwordShoot.wav");
 	Sounds->LoadSound(Sound::ID::CombinShot, "SFX/SwordCombined.wav");
 
+	//Music
+	Musics->LoadMusic(Music::ID::Dungeon, "Music/DungeonTheme.mp3");
+
 	//Textures
 	Textures->LoadTexture(Texture::ID::LinkAnims, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::Dot, "Textures/dot.bmp");

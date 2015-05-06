@@ -42,7 +42,14 @@ namespace Sound
 		Sword,
 		SwordShot,
 		CombinShot
-
+	};
+}
+namespace Music
+{
+	enum ID
+	{
+		Title, 
+		Dungeon
 	};
 }
 
