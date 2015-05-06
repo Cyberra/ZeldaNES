@@ -32,7 +32,7 @@ public:
 	void Update();
 	void Stop();
 
-	void TravelTo(Level* prevRoom, Level* nextRoom);
+	void TravelTo(Level* prevRoom, Level* nextRoom, const int direction);
 private:
 
 	Level* rooms[18];
