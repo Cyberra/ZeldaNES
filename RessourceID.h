@@ -46,5 +46,14 @@ namespace Sound
 	};
 }
 
+namespace Font 
+{
+	enum ID
+	{
+		tempFont
+	};
+
+}
+
 
 #endif

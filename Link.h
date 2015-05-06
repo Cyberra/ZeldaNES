@@ -35,13 +35,25 @@ private:
 	// Speed of the Dot
 	const float SPEED;
 
+	// Name
+	std::string name;
+
 	// States used by Link.
 	enum state {
-		IDLE, WALK_LEFT, WALK_RIGHT,
-		WALK_UP, WALK_DOWN, ATK_LEFT,
-		ATK_RIGHT, ATK_UP, ATK_DOWN,
-		PICK_OBJECT, HURT_LEFT, HURT_RIGHT,
-		HURT_UP, HURT_DOWN
+		IDLE, 
+		WALK_LEFT, 
+		WALK_RIGHT,
+		WALK_UP, 
+		WALK_DOWN, 
+		ATK_LEFT,
+		ATK_RIGHT, 
+		ATK_UP, 
+		ATK_DOWN,
+		PICK_OBJECT, 
+		HURT_LEFT, 
+		HURT_RIGHT,
+		HURT_UP, 
+		HURT_DOWN
 	};
 
 	// Sets his look
