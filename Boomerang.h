@@ -2,6 +2,7 @@
 
 #include "Libraries.h"
 #include "Objects.h"
+#include "Tile.h"
 
 class Boomerang
 	: public Objects
@@ -13,6 +14,7 @@ public:
 	void Init(float currentX, float currentY, Vector2D &direction);
 	void Clear();
 	void Move();
+	bool Collides(const Tile *tileToCheck);
 
 private:
 	// Speed of the bullet

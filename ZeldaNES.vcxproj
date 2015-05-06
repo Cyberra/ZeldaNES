@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Boomerang.cpp" />
+    <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="HeartDrop.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Link.cpp" />
@@ -105,6 +106,7 @@
     <ClCompile Include="RoomShop.cpp" />
     <ClCompile Include="RoomTriforce.cpp" />
     <ClCompile Include="RoomUnderground.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileManager.cpp" />
@@ -112,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boomerang.h" />
+    <ClInclude Include="Enemies.h" />
     <ClInclude Include="HeartDrop.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Libraries.h" />
@@ -138,6 +141,7 @@
     <ClInclude Include="RoomShop.h" />
     <ClInclude Include="RoomTriforce.h" />
     <ClInclude Include="RoomUnderground.h" />
+    <ClInclude Include="Skeleton.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileManager.h" />
     <ClInclude Include="ZeldaNES.h" />

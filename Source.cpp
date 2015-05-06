@@ -9,7 +9,7 @@ int main(int argc, char* args[])
 	Engine::GetInstance()->Init(SCREEN_LENGTH, SCREEN_HEIGHT);
 
 
-	// OpeningScreen* opS = new OpeningScreen();
+	//OpeningScreen* opS = new OpeningScreen();
 	ZeldaNES* zeldaNES = new ZeldaNES();
 	
 	

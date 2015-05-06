@@ -19,17 +19,19 @@ public:
 	void Init(const int spawnX, const int spawnY, SDL_Rect link);
 
 	//Collision check
-	bool HeartDrop::LinkIsTouching(SDL_Rect linkRect);
+	bool LinkIsTouching(SDL_Rect linkRect);
 
 	//Size of the collision box for Heart.
 	static const int HEART_HEIGHT = 8;
 	static const int HEART_WIDTH = 7;
 
-	//Collider
-	SDL_Rect hCollider;
-	SDL_Rect linkRect;
+	
 
 private:
 	int x, y;
+	
+	//Collider
+	SDL_Rect hCollider;
+	SDL_Rect linkRect;
 };
 
