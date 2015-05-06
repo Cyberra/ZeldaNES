@@ -12,7 +12,7 @@ public:
 
 	void Init(float currentX, float currentY, Vector2D &direction);
 	void Clear();
-	void MoveBoomerang();
+	void Move();
 
 private:
 	// Speed of the bullet

@@ -17,13 +17,3 @@ Objects::~Objects()
 {
 
 }
-
-void Objects::Clear()
-{
-
-}
-
-void Objects::Move()
-{
-
-}
