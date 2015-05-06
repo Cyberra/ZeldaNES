@@ -38,5 +38,49 @@ void Boomerang::Clear()
 
 void Boomerang::Move()
 {
+	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
 
+	currentX += SPEED * direction.x * dt;
+	currentY += SPEED * direction.y * dt;
+
+	this->SetPosition((int)currentX, (int)currentY);
+}
+
+// Function that check if there is a collision
+bool Boomerang::Collides(const Tile *tileToCheck)
+{
+	bool canMove = true;
+
+	//switch (tileToCheck->GetId())
+	//{
+	//case TILE_TYPE_NONE:
+	//	break;
+	//
+	//case TILE_TYPE_BLOCK:
+	//	canMove = false;
+	//	break;
+	//
+	//case TILE_TYPE_DOOR:
+	//	break;
+	//
+	//case TILE_TYPE_CHEST:
+	//	break;
+	//
+	//case TILE_TYPE_SPAWN:
+	//	break;
+	//
+	//case TILE_TYPE_POT:
+	//	break;
+	//
+	//case TILE_TYPE_FOOD:
+	//	break;
+	//
+	//case TILE_TYPE_KEY:
+	//	break;
+
+	//default:
+	//	break;
+	//}
+
+	return canMove;
 }
