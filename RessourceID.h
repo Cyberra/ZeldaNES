@@ -42,8 +42,24 @@ namespace Sound
 		Sword,
 		SwordShot,
 		CombinShot
-
 	};
+}
+namespace Music
+{
+	enum ID
+	{
+		Title, 
+		Dungeon
+	};
+}
+
+namespace Font 
+{
+	enum ID
+	{
+		tempFont
+	};
+
 }
 
 

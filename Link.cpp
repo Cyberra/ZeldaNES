@@ -119,6 +119,16 @@ void Link::changeState(state newState)
 	}
 }
 
+point<float> Link::GetNextPos(const Vector2D &direction)
+{
+	point<float> p;
+
+	p.x = linkX + direction.x;
+	p.y = linkY + direction.y;
+
+	return p;
+}
+
 void Link::Enter(Level* room)
 {
 	actualRoom = room;

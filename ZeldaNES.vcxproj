@@ -85,6 +85,7 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Link.cpp" />
     <ClCompile Include="Objects.cpp" />
+    <ClCompile Include="OpeningScreen.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room01.cpp" />
     <ClCompile Include="Room02.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="Libraries.h" />
     <ClInclude Include="Link.h" />
     <ClInclude Include="Objects.h" />
+    <ClInclude Include="OpeningScreen.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RessourceID.h" />
     <ClInclude Include="Room01.h" />
