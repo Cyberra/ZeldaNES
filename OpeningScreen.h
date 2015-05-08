@@ -9,8 +9,14 @@ public:
 	OpeningScreen();
 	~OpeningScreen();
 
+	// Virtuals used
 	void Update();
-	void Kill();
+	void Kill() { delete this; }
+
+	// Virtuals unused
+	void Start() {}
+	void Draw() {}
+	void Stop() {}
 
 private:
 	Text* titleText;

@@ -27,9 +27,14 @@ public:
 	ZeldaNES();
 	~ZeldaNES();
 
+	// Virtuals used
 	void Start();
 	void Update();
 	void Stop();
+	void Kill() { delete this; }
+
+	// Virtuals Unused
+	void Draw() {}
 
 	void TravelTo(Level* prevRoom, Level* nextRoom, const int direction);
 private:

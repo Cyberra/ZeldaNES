@@ -42,16 +42,16 @@ ZeldaNES::ZeldaNES()
 	Textures->LoadTexture(Texture::ID::HeartDrop, "Textures/ZeldaSprites.png");
 
 	// Render order
-	rooms[0] = new Room01();
-	rooms[1] = new Room02();
-	rooms[2] = new Room03();
-	rooms[3] = new Room04();
-	rooms[4] = new Room05();
-	rooms[5] = new Room06();
-	rooms[6] = new Room07();
-	rooms[7] = new Room08();
-	rooms[8] = new Room09();
-	rooms[9] = new Room10();
+	rooms[0]  = new Room01();
+	rooms[1]  = new Room02();
+	rooms[2]  = new Room03();
+	rooms[3]  = new Room04();
+	rooms[4]  = new Room05();
+	rooms[5]  = new Room06();
+	rooms[6]  = new Room07();
+	rooms[7]  = new Room08();
+	rooms[8]  = new Room09();
+	rooms[9]  = new Room10();
 	rooms[10] = new Room11();
 	rooms[11] = new Room12();
 	rooms[12] = new Room13();

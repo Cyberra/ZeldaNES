@@ -15,12 +15,19 @@ public:
 	// Getter / Setter
 	void SetPlayer(Player* l){ player = l; }
 	
-	// Virtuals
+	// Virtuals used
 	void Update();
+	void Kill() { delete this; }
+
+	// Virtual unused
+	void Start() {}
+	void Draw() {}
+	void Stop() {}
 
 	// Locals
 	void Show();
 	void Hide();
+
 
 protected:
 	Player* player;

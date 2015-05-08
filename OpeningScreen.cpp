@@ -27,8 +27,3 @@ void OpeningScreen::Update()
 		new ZeldaNES();
 	}
 }
-
-void OpeningScreen::Kill() 
-{
-	delete this;
-}

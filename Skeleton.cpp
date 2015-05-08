@@ -8,9 +8,9 @@ Skeleton::Skeleton()
 	, isStunned(false)
 	, currentRoom(nullptr)
 {
-	//Start the animation on creation
+	// Start the animation on creation
 	this->Play();
-	//Make it loop
+	// Make it loop
 	this->SetIsLooping(true);
 }
 
