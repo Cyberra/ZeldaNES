@@ -1,8 +1,5 @@
 #include "Tile.h"
 
-const int Tile::TILE_WIDTH;
-const int Tile::TILE_HEIGHT;
-
 Tile::Tile()
 	: type(0)
 {
