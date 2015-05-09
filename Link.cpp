@@ -21,7 +21,7 @@ Link::Link()
 	collider.h = LINK_HEIGHT;
 
 	collider.x = (int)linkX;
-	collider.y = (int)linkY + LINK_HEIGHT/2;
+	collider.y = (int)linkY + LINK_HEIGHT / 2;
 }
 
 Link::~Link()
@@ -232,10 +232,10 @@ void Link::Update()
 		isMoving = true;
 	}
 
-	if		(Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_D) ||
-			 Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_S) ||
-			 Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_A) ||
-			 Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_W)	)
+	if (Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_D) ||
+	    Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_S) ||
+	    Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_A) ||
+	    Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_W)	)
 	{
 		isMoving = false;
 	}

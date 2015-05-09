@@ -1,6 +1,7 @@
 #pragma once
 #include "Animation.h"
 #include "TileManager.h"
+#include <random>
 
 //////////////////////////////////////////////////////////////
 // This abstract class is to be implemented in all enemy types
@@ -20,7 +21,7 @@ public:
 	virtual void Move(TileManager* tm) = 0;
 	// Fancy getter to find the next tile's type. Nearly all enemies can only move on 00
 	// Tile types.
-	virtual int GetNextTileType(TileManager* tm) = 0;
+	virtual point<int> GetNextPos(const Vector2D &direction) = 0;
 
 	virtual ~Enemies();
 

@@ -14,6 +14,7 @@ namespace Texture
 		Walls,
 		Doors,
 		Triforce,
+		Stalfo,
 		OpeningAnim
 	};
 }

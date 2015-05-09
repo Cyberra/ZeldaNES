@@ -33,6 +33,7 @@ ZeldaNES::ZeldaNES()
 
 	//Textures
 	Textures->LoadTexture(Texture::ID::LinkAnims, "Textures/ZeldaSprites.png");
+	Textures->LoadTexture(Texture::ID::Stalfo, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::Dot, "Textures/dot.bmp");
 	Textures->LoadTexture(Texture::ID::Tile, "Textures/tiles.png");
 	Textures->LoadTexture(Texture::ID::DungeonRoom, "Textures/TilesForDungeonMap.png");
