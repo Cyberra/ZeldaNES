@@ -10,7 +10,6 @@ Skeleton::Skeleton()
 	, randomizer(0)
 	, isAlive(true)
 	, isStunned(false)
-	, doneMoving(false)
 	, currentRoom(nullptr)
 {
 	SetPosition(skellyX, skellyY);
@@ -20,8 +19,6 @@ Skeleton::Skeleton()
 	collider.w = FRAME_SIZE().y;
 	collider.x = (int)skellyX;
 	collider.y = (int)skellyY;
-
-
 }
 
 Skeleton::~Skeleton()
@@ -32,10 +29,7 @@ Skeleton::~Skeleton()
 void Skeleton::Update()
 {
 	Animation::Update();
-	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
-
 	randomizer = rand() % 4;
-
 	collider.x = skellyX;
 	collider.y = skellyY;
 
@@ -47,31 +41,26 @@ void Skeleton::MoveCollider(const Vector2D &direction)
 	collider.y = GetNextPos(direction).y;
 }
 
-
 void Skeleton::Move(TileManager* tm)
 {
 	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
-	moveTimer += dt;
-	std::cout << randomizer << std::endl;
-
-	if (moveTimer >= (40 * dt))
+	moveTimer += (40 * dt);
+	if (moveTimer >= 16)
 	{
 		ChangeDirection(randomizer);
 		moveTimer = 0;
-		
 	}
-
 	if (tm->TouchesWall(collider))
 	{
+		skellyX -= direction.x;
+		skellyY -= direction.y;
 		ChangeDirection(randomizer);
-		std::cout << "gotta change" << std::endl;
 	}
 	else
 	{
 		skellyX += (direction.x * 40) * dt;
 		skellyY += (direction.y * 40) * dt;
 	}
-
 	SetPosition(skellyX, skellyY);
 
 }
@@ -88,46 +77,23 @@ void Skeleton::ChangeDirection(int choice)
 	switch (choice)
 	{
 	case NORTH:
-		//std::cout << "UP!" << std::endl;
-
 		SetDirection(UP);
 		break;
 	case EAST:
-		//std::cout << "RIGHT!" << std::endl;
-
 		SetDirection(RIGHT);
 		break;
 	case SOUTH:
-		//std::cout << "DOWN!" << std::endl;
-
 		SetDirection(DOWN);
 		break;
 	case WEST:
-		//std::cout << "LEFT!" << std::endl;
-
 		SetDirection(LEFT);
 		break;
 	default:
-		//std::cout << "WHAT!" << std::endl;
 		break;
 	}
 }
 void Skeleton::Enter(Level* room)
 {
 	currentRoom = room;
-	room->Show();
 	room->SetEnemies(this);
 }
-
-
-/*
-Here's how it's going to go:
-	-Check collision in front of Skeleton with random direction
-		-If clear, move 1 tile (16 pixels) in that direction
-		-if not, take random out of 4 and use a switch case to set new direction (0 , 1 / 0 , -1 )
-	-after moving 1 tile, random again.
-	-Repeat
-
-
-
-*/
