@@ -3,9 +3,10 @@
 
 Skeleton::Skeleton()
 	: Enemies(Texture::ID::Stalfo, NUM_OF_FRAMES(), ANIM_DEFAULT_SPEED, SKELLY_ANIM_SRC(), FRAME_SIZE())
-	, direction(0.0f, 1.0f)
-	, skellyX(804)
-	, skellyY(900)
+	, direction(0.0f, -1.0f)
+	, skellyX(820)
+	, skellyY(954)
+	, moveTimer(0)
 	, randomizer(0)
 	, isAlive(true)
 	, isStunned(false)
@@ -20,10 +21,6 @@ Skeleton::Skeleton()
 	collider.x = (int)skellyX;
 	collider.y = (int)skellyY;
 
-	checker.h = FRAME_SIZE().x;
-	checker.w = FRAME_SIZE().y;
-	checker.x = (int)skellyX;
-	checker.y = (int)skellyY;
 
 }
 
@@ -36,29 +33,45 @@ void Skeleton::Update()
 {
 	Animation::Update();
 	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
-	if (doneMoving)
-	{
-		randomizer = rand() % 5;
-		ChangeDirection(randomizer);
-	}
+
+	randomizer = rand() % 4;
+
+	collider.x = skellyX;
+	collider.y = skellyY;
 
 }
+// Move the collider
+void Skeleton::MoveCollider(const Vector2D &direction)
+{
+	collider.x = GetNextPos(direction).x;
+	collider.y = GetNextPos(direction).y;
+}
+
 
 void Skeleton::Move(TileManager* tm)
 {
-
 	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
+	moveTimer += dt;
+	std::cout << randomizer << std::endl;
 
-	
-	if (tm->TouchesWall(checker)) //<---This the function to check collision (TouchesWall)
+	if (moveTimer >= (40 * dt))
 	{
 		ChangeDirection(randomizer);
+		moveTimer = 0;
+		
 	}
-	//skellyX += (SPEED * direction.x) * dt;
 
-	//skellyY += (SPEED * direction.y) * dt;
-	checker.x = GetNextPos(this->direction).x + skellyX;
-	checker.y = GetNextPos(this->direction).y + skellyY;
+	if (tm->TouchesWall(collider))
+	{
+		ChangeDirection(randomizer);
+		std::cout << "gotta change" << std::endl;
+	}
+	else
+	{
+		skellyX += (direction.x * 40) * dt;
+		skellyY += (direction.y * 40) * dt;
+	}
+
 	SetPosition(skellyX, skellyY);
 
 }
@@ -66,8 +79,8 @@ void Skeleton::Move(TileManager* tm)
 point<int> Skeleton::GetNextPos(const Vector2D &direction)
 {
 	point<int> p;
-	p.x = skellyX + 16 * direction.x;
-	p.y = skellyY + 16 * direction.y;
+	p.x = skellyX + direction.x;
+	p.y = skellyY + direction.y;
 	return p;
 }
 void Skeleton::ChangeDirection(int choice)
@@ -75,22 +88,37 @@ void Skeleton::ChangeDirection(int choice)
 	switch (choice)
 	{
 	case NORTH:
+		//std::cout << "UP!" << std::endl;
+
 		SetDirection(UP);
 		break;
 	case EAST:
+		//std::cout << "RIGHT!" << std::endl;
+
 		SetDirection(RIGHT);
 		break;
 	case SOUTH:
+		//std::cout << "DOWN!" << std::endl;
+
 		SetDirection(DOWN);
 		break;
 	case WEST:
+		//std::cout << "LEFT!" << std::endl;
+
 		SetDirection(LEFT);
 		break;
 	default:
-		std::cout << "WHAT!" << std::endl; 
+		//std::cout << "WHAT!" << std::endl;
 		break;
 	}
 }
+void Skeleton::Enter(Level* room)
+{
+	currentRoom = room;
+	room->Show();
+	room->SetEnemies(this);
+}
+
 
 /*
 Here's how it's going to go:

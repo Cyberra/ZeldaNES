@@ -15,12 +15,14 @@ public:
 	// Setter for this ^
 	void SetRoom(Level *room) { currentRoom = room; }
 
+	void Enter(Level* room);
+
 	void Update();
 	void SetDirection(Vector2D whereIGo){ direction = whereIGo; }
 	void ChangeDirection(int choice);
 
 	void Move(TileManager* tm);
-	void MoveCollider(Vector2D direction);
+	void MoveCollider(const Vector2D &direction);
 
 private:
 	int randomizer;
@@ -46,11 +48,10 @@ private:
 	float skellyX;
 	float skellyY;
 
+	float moveTimer;
+
 	// Collision box
 	SDL_Rect collider;
-
-	// Collision box to check if next tile is non-collision
-	SDL_Rect checker;
 
 	point<int> Skeleton::GetNextPos(const Vector2D &direction);
 	

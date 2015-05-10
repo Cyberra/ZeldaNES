@@ -67,7 +67,7 @@ ZeldaNES::ZeldaNES()
 
 	// Initialise game
 	actualRoom = rooms[0];
-	skelly->SetRoom(rooms[0]);
+	skelly->Enter(rooms[0]);
 	link->Enter(rooms[0]);
 	link->Leave(rooms[1]);
 }
