@@ -7,6 +7,7 @@ Level::Level()
 Level::Level(const std::string mapPath)
 	: TileManager(mapPath)
 	, player(nullptr)
+	, enemy(nullptr)
 
 {
 
@@ -22,6 +23,10 @@ void Level::Update()
 	if (player != nullptr)
 	{
 		player->Move(this);
+	}
+	if (enemy != nullptr)
+	{
+		enemy->Move(this);
 	}
 }
 

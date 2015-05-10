@@ -2,6 +2,7 @@
 
 #include "TileManager.h"
 #include "Player.h"
+#include "Enemies.h"
 
 class Level 
 	: public TileManager
@@ -31,4 +32,5 @@ public:
 
 protected:
 	Player* player;
+	Enemies* enemy;
 };

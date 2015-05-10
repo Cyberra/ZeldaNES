@@ -63,9 +63,11 @@ ZeldaNES::ZeldaNES()
 	rooms[17] = new RoomUnderground();
 
 	link = new Link();
+	skelly = new Skeleton();
 
 	// Initialise game
 	actualRoom = rooms[0];
+	skelly->SetRoom(rooms[0]);
 	link->Enter(rooms[0]);
 	link->Leave(rooms[1]);
 }

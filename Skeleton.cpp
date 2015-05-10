@@ -15,7 +15,8 @@ Skeleton::Skeleton()
 	collider.h = FRAME_SIZE().x;
 	collider.w = FRAME_SIZE().y;
 	collider.x = (int)skellyX;
-	collider.y = (int)skellyY;	
+	collider.y = (int)skellyY;
+
 	checker.h = FRAME_SIZE().x;
 	checker.w = FRAME_SIZE().y;
 	checker.x = (int)skellyX;
@@ -45,25 +46,16 @@ void Skeleton::Move(TileManager* tm)
 
 	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
 
-	MoveCollider(direction);
-	//If the dot went too far to the left or right or touched a wall
-	if (tm->TouchesWall(collider)) //<---This the function to check collision (TouchesWall)
+	
+	if (tm->TouchesWall(checker)) //<---This the function to check collision (TouchesWall)
 	{
-		//move back
-		//std::cout << "Aille!!!!" << std::endl;
-		//SetDirection
+		ChangeDirection(randomizer);
 	}
 	//skellyX += (SPEED * direction.x) * dt;
-	//Move the dot up or down
-	
-	//If the dot went too far up or down or touched a wall
-	if (tm->TouchesWall(collider))
-	{
-		//move back
-		//skellyY -= (SPEED * direction.y) * dt + direction.y;
-	}
+
 	//skellyY += (SPEED * direction.y) * dt;
-	
+	checker.x = GetNextPos(this->direction).x + skellyX;
+	checker.y = GetNextPos(this->direction).y + skellyY;
 	SetPosition(skellyX, skellyY);
 
 }
@@ -71,17 +63,9 @@ void Skeleton::Move(TileManager* tm)
 point<int> Skeleton::GetNextPos(const Vector2D &direction)
 {
 	point<int> p;
-
 	p.x = skellyX + 16 * direction.x;
 	p.y = skellyY + 16 * direction.y;
-
 	return p;
-}
-// Moves the Collider for the next tile
-void Skeleton::MoveCollider(Vector2D direction)
-{
-	collider.x = GetNextPos(direction).x;
-	collider.y = GetNextPos(direction).y;
 }
 void Skeleton::ChangeDirection(int choice)
 {
