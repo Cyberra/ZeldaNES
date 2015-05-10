@@ -11,26 +11,23 @@ public:
 
 	// Getter for the room in which the Skeleton spawns
 	Level const *GetRoom() { return currentRoom; }
-	
-	// Setter for this ^
-	void SetRoom(Level *room) { currentRoom = room; }
-
+	// Room setter
+	void Enter(Level* room);
+	// Updates and some important elements (resets collider to sprite location)
 	void Update();
+	// Sets the direction in which the enemy is moving
 	void SetDirection(Vector2D whereIGo){ direction = whereIGo; }
-	void ChangeDirection(int choice);
 
-	void Move(TileManager* tm);
-	void MoveCollider(Vector2D direction);
 
 private:
+	// Int used to change the direction of the enemy.
 	int randomizer;
-
+	// For easy tracking
 	enum cardinal {NORTH, SOUTH, EAST, WEST};
 
 	// Status related bools
 	bool isAlive;
 	bool isStunned;
-	bool doneMoving;
 	
 	// Room in which the skeletons spawn
 	Level* currentRoom;
@@ -46,14 +43,21 @@ private:
 	float skellyX;
 	float skellyY;
 
+	float moveTimer;
+
 	// Collision box
 	SDL_Rect collider;
 
-	// Collision box to check if next tile is non-collision
-	SDL_Rect checker;
-
+	// Changes the direction when colliding or when having moved at least 1 tile
+	void ChangeDirection(int choice);
+	// Update-like method that takes care of movement
+	void Move(TileManager* tm);
+	// Method that moves the collider for a single frame to check for collisions
+	void MoveCollider(const Vector2D &direction);
+	// Used to check the collision of the next position
 	point<int> Skeleton::GetNextPos(const Vector2D &direction);
 	
+	// Animation related stuff
 	const int NUM_OF_FRAMES()					{ return 2; }
 	const point<int> FRAME_SIZE()				{ return{ 16, 16 }; };
 	const point<int> SKELLY_ANIM_SRC()			{ return{ 0, 96 }; };

@@ -3,13 +3,13 @@
 
 Skeleton::Skeleton()
 	: Enemies(Texture::ID::Stalfo, NUM_OF_FRAMES(), ANIM_DEFAULT_SPEED, SKELLY_ANIM_SRC(), FRAME_SIZE())
-	, direction(0.0f, 1.0f)
-	, skellyX(804)
-	, skellyY(900)
+	, direction(0.0f, -1.0f)
+	, skellyX(820)
+	, skellyY(954)
+	, moveTimer(0)
 	, randomizer(0)
 	, isAlive(true)
 	, isStunned(false)
-	, doneMoving(false)
 	, currentRoom(nullptr)
 {
 	SetPosition(skellyX, skellyY);
@@ -19,12 +19,6 @@ Skeleton::Skeleton()
 	collider.w = FRAME_SIZE().y;
 	collider.x = (int)skellyX;
 	collider.y = (int)skellyY;
-
-	checker.h = FRAME_SIZE().x;
-	checker.w = FRAME_SIZE().y;
-	checker.x = (int)skellyX;
-	checker.y = (int)skellyY;
-
 }
 
 Skeleton::~Skeleton()
@@ -35,30 +29,38 @@ Skeleton::~Skeleton()
 void Skeleton::Update()
 {
 	Animation::Update();
-	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
-	if (doneMoving)
-	{
-		randomizer = rand() % 5;
-		ChangeDirection(randomizer);
-	}
+	randomizer = rand() % 4;
+	collider.x = skellyX;
+	collider.y = skellyY;
 
+}
+// Move the collider
+void Skeleton::MoveCollider(const Vector2D &direction)
+{
+	collider.x = GetNextPos(direction).x;
+	collider.y = GetNextPos(direction).y;
 }
 
 void Skeleton::Move(TileManager* tm)
 {
-
 	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
-
-	
-	if (tm->TouchesWall(checker)) //<---This the function to check collision (TouchesWall)
+	moveTimer += (40 * dt);
+	if (moveTimer >= 16)
 	{
 		ChangeDirection(randomizer);
+		moveTimer = 0;
 	}
-	//skellyX += (SPEED * direction.x) * dt;
-
-	//skellyY += (SPEED * direction.y) * dt;
-	checker.x = GetNextPos(this->direction).x + skellyX;
-	checker.y = GetNextPos(this->direction).y + skellyY;
+	if (tm->TouchesWall(collider))
+	{
+		skellyX -= direction.x;
+		skellyY -= direction.y;
+		ChangeDirection(randomizer);
+	}
+	else
+	{
+		skellyX += (direction.x * 40) * dt;
+		skellyY += (direction.y * 40) * dt;
+	}
 	SetPosition(skellyX, skellyY);
 
 }
@@ -66,8 +68,8 @@ void Skeleton::Move(TileManager* tm)
 point<int> Skeleton::GetNextPos(const Vector2D &direction)
 {
 	point<int> p;
-	p.x = skellyX + 16 * direction.x;
-	p.y = skellyY + 16 * direction.y;
+	p.x = skellyX + direction.x;
+	p.y = skellyY + direction.y;
 	return p;
 }
 void Skeleton::ChangeDirection(int choice)
@@ -87,19 +89,11 @@ void Skeleton::ChangeDirection(int choice)
 		SetDirection(LEFT);
 		break;
 	default:
-		std::cout << "WHAT!" << std::endl; 
 		break;
 	}
 }
-
-/*
-Here's how it's going to go:
-	-Check collision in front of Skeleton with random direction
-		-If clear, move 1 tile (16 pixels) in that direction
-		-if not, take random out of 4 and use a switch case to set new direction (0 , 1 / 0 , -1 )
-	-after moving 1 tile, random again.
-	-Repeat
-
-
-
-*/
+void Skeleton::Enter(Level* room)
+{
+	currentRoom = room;
+	room->SetEnemies(this);
+}

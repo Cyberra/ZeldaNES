@@ -15,7 +15,8 @@ public:
 
 	// Getter / Setter
 	void SetPlayer(Player* l){ player = l; }
-	
+	void SetEnemies(Enemies* e){ enemy = e; }
+
 	// Virtuals used
 	void Update();
 	void Kill() { delete this; }
