@@ -204,7 +204,8 @@ TileManager::TileManager(std::string mapPath)
 
 TileManager::~TileManager()
 {
-
+	//delete tiles[TileManager::TOTAL_TILES];
+	//tiles[TileManager::TOTAL_TILES] = nullptr;
 }
 
 // Check for collision
@@ -216,16 +217,18 @@ bool TileManager::TouchesWall(SDL_Rect box)
 		//If the tile is a wall type tile
 		if (((tiles[i]->GetType() >= GREEN_BLOCK) && (tiles[i]->GetType() <= GREY_RIGHT_STATUE)) || (tiles[i]->GetType() == WATER))
 		{
-			//std::cout << "Hello wall" << std::endl;
 			//If the collision box touches the wall tile
 			Rectangle *r1 = new Rectangle(box.x, box.y, box.w, box.h);
 			Rectangle *r2 = new Rectangle(tiles[i]->GetBox().x, tiles[i]->GetBox().y, tiles[i]->GetBox().w, tiles[i]->GetBox().h);
 
  			if (r1->CollidesWith(r2))		
 			{
-				//std::cout << "Hello wall" << std::endl;
 				return true;
 			}
+			delete r1;
+			delete r2;
+			r1 = nullptr;
+			r2 = nullptr;
 		}
 	}
 

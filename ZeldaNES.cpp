@@ -80,7 +80,8 @@ ZeldaNES::ZeldaNES()
 
 ZeldaNES::~ZeldaNES()
 {
-
+	delete camera;
+	camera = nullptr;
 }
 
 void ZeldaNES::Start()

@@ -15,7 +15,11 @@ Level::Level(const std::string mapPath)
 
 Level::~Level()
 {
-
+	//for (int i = 0; i < TOTAL_TILES; i++)
+	//{
+	//	delete tiles[i];
+	//	tiles[i] = nullptr;
+	//}
 }
 
 void Level::Update()
