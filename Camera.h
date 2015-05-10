@@ -13,6 +13,8 @@ public:
 
 	void ScrollLeft(int xPos);
 	void ScrollRight(int xPos);
+	void ScrollUp(int yPos);
+	void ScrollDown(int yPos);
 	void ResetPosition();
 
 	void SetCameraPosition(int xPos, int yPos);

@@ -20,6 +20,7 @@
 #include "RoomShop.h"
 #include "RoomTriforce.h"
 #include "RoomUnderground.h"
+#include "Camera.h"
 
 class ZeldaNES :
 	public Component
@@ -33,12 +34,18 @@ public:
 	void Update();
 	void Stop();
 	void Kill() { delete this; }
+	void UpdateCamera();
+
+	static Camera* camera;
 
 	// Virtuals Unused
 	void Draw() {}
 
 	void TravelTo(Level* prevRoom, Level* nextRoom, const int direction);
 private:
+
+	
+
 	Level *actualRoom;
 	Level* rooms[18];
 	Link *link;

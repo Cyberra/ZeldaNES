@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Boomerang.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="HeartDrop.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -114,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boomerang.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="HeartDrop.h" />
     <ClInclude Include="Level.h" />

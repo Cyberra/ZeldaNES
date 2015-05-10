@@ -1,5 +1,9 @@
 #include "ZeldaNES.h"
 
+//Creating camera
+Camera* ZeldaNES::camera = new Camera();
+
+
 ZeldaNES::ZeldaNES()
 {
 	// Loading resources
@@ -70,6 +74,8 @@ ZeldaNES::ZeldaNES()
 	skelly->SetRoom(rooms[0]);
 	link->Enter(rooms[0]);
 	link->Leave(rooms[1]);
+
+	camera->SetCameraPosition(400, 400);
 }
 
 ZeldaNES::~ZeldaNES()
@@ -150,6 +156,10 @@ void ZeldaNES::Update()
 		TravelTo(actualRoom, rooms[10], 0);
 		actualRoom = rooms[10];
 	}
+
+	UpdateCamera();
+
+
 }
 
 void ZeldaNES::Stop()
@@ -161,4 +171,9 @@ void ZeldaNES::TravelTo(Level* prevRoom, Level* nextRoom, const int direction)
 {
 	link->Leave(prevRoom);
 	link->Enter(nextRoom);
+}
+
+void ZeldaNES::UpdateCamera()
+{
+	camera->SetCameraPosition(400, 400);
 }

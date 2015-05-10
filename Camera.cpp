@@ -10,8 +10,8 @@ const point<int> DEFAULT_RESOLUTION = RESOLUTION_NTSC;
 Camera::Camera()
 {
 	view = new SDL_Rect();
-	view->x = 0;
-	view->y = 0;
+	view->x = 800;
+	view->y = 400;
 	view->w = DEFAULT_RESOLUTION.x;
 	view->h = DEFAULT_RESOLUTION.y;
 }
@@ -33,6 +33,8 @@ void Camera::Stop()
 
 void Camera::Update()
 {
+
+
 }
 
 void Camera::SetCameraPosition(int x, int y)
@@ -49,6 +51,16 @@ void Camera::ScrollLeft(int xPos)
 void Camera::ScrollRight(int xPos)
 {
 	SetCameraPosition((int)(xPos - view->w * RIGHT_SCROLLING), view->y);
+}
+
+void Camera::ScrollUp(int yPos)
+{
+	SetCameraPosition((int)(yPos - view->w * RIGHT_SCROLLING), view->y);
+}
+
+void Camera::ScrollDown(int yPos)
+{
+	SetCameraPosition((int)(yPos - view->w * RIGHT_SCROLLING), view->y);
 }
 
 void Camera::ResetPosition()
