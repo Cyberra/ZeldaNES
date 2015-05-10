@@ -4,12 +4,15 @@
 Skeleton::Skeleton()
 	: Enemies(Texture::ID::Stalfo, NUM_OF_FRAMES(), ANIM_DEFAULT_SPEED, SKELLY_ANIM_SRC(), FRAME_SIZE())
 	, direction(0.0f, 1.0f)
+	, skellyX(804)
+	, skellyY(900)
 	, randomizer(0)
 	, isAlive(true)
 	, isStunned(false)
 	, doneMoving(false)
 	, currentRoom(nullptr)
 {
+	SetPosition(skellyX, skellyY);
 	this->Play();
 	this->SetIsLooping(true);
 	collider.h = FRAME_SIZE().x;
