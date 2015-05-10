@@ -20,7 +20,7 @@ Link::Link()
 	collider.w = LINK_WIDTH;
 	collider.h = LINK_HEIGHT;
 
-	collider.x = (int)linkX;
+	collider.x = (int)linkX + LINK_WIDTH / 2;
 	collider.y = (int)linkY + LINK_HEIGHT / 2;
 }
 
@@ -155,29 +155,24 @@ void Link::Move(TileManager* tm)
 
 	MoveBox(direction);
 
-	//Move the dot left or right
+	//Move link left or right
 	linkX += (SPEED * direction.x) * dt;
 
-	/*
-		WARNING!!!!!! -> Collision is not totaly working, the wall is not working AT ALL! So you can go wherever you want ! and the object collision is floppy.
-	*/
-
-	//If the dot went too far to the left or right or touched a wall
+	//If link went too far to the left or right or touched a wall
 	if (tm->TouchesWall(collider)) //<---This the function to check collision (TouchesWall)
 	{
 		//move back
-		//std::cout << "Aille!!!!" << std::endl;
-		linkX -= (SPEED * direction.x) * dt + direction.x;
+		linkX -= (SPEED * direction.x) * dt;
 	}
 
-	//Move the dot up or down
+	//Move the link up or down
 	linkY += (SPEED * direction.y) * dt;
 
-	//If the dot went too far up or down or touched a wall
+	//If link went too far up or down or touched a wall
 	if (tm->TouchesWall(collider))
 	{
 		//move back
-		linkY -= (SPEED * direction.y) * dt + direction.y;
+		linkY -= (SPEED * direction.y) * dt;
 	}
 	SetPosition(linkX, linkY);
 }
@@ -189,7 +184,7 @@ void Link::MoveBox(const Vector2D &direction)
 	collider.y = GetNextPos(direction).y;
 }
 
-// Update Everything!!!!!!!
+// Update Everything for link!!!!!!!
 void Link::Update()
 {
 	Animation::Update();
