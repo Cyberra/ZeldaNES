@@ -23,6 +23,9 @@ public:
 	// Tile types.
 	virtual point<int> GetNextPos(const Vector2D &direction) = 0;
 
+	// If the collision with the sword is true, then apply damage to the enemy.
+	virtual void Lacerate(SDL_Rect hitter) = 0;
+
 	virtual ~Enemies();
 
 };

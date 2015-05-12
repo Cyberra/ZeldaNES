@@ -28,11 +28,13 @@ Skeleton::~Skeleton()
 
 void Skeleton::Update()
 {
-	Animation::Update();
-	randomizer = rand() % 4;
-	collider.x = skellyX;
-	collider.y = skellyY;
-
+	if (isAlive)
+	{
+		Animation::Update();
+		randomizer = rand() % 4;
+		collider.x = skellyX;
+		collider.y = skellyY;
+	}
 }
 // Move the collider
 void Skeleton::MoveCollider(const Vector2D &direction)
@@ -43,26 +45,28 @@ void Skeleton::MoveCollider(const Vector2D &direction)
 
 void Skeleton::Move(TileManager* tm)
 {
-	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
-	moveTimer += (40 * dt);
-	if (moveTimer >= 16)
+	if (isAlive)
 	{
-		ChangeDirection(randomizer);
-		moveTimer = 0;
+		float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
+		moveTimer += (40 * dt);
+		if (moveTimer >= 16)
+		{
+			ChangeDirection(randomizer);
+			moveTimer = 0;
+		}
+		if (tm->TouchesWall(collider))
+		{
+			skellyX -= direction.x;
+			skellyY -= direction.y;
+			ChangeDirection(randomizer);
+		}
+		else
+		{
+			skellyX += (direction.x * 40) * dt;
+			skellyY += (direction.y * 40) * dt;
+		}
+		SetPosition(skellyX, skellyY);
 	}
-	if (tm->TouchesWall(collider))
-	{
-		skellyX -= direction.x;
-		skellyY -= direction.y;
-		ChangeDirection(randomizer);
-	}
-	else
-	{
-		skellyX += (direction.x * 40) * dt;
-		skellyY += (direction.y * 40) * dt;
-	}
-	SetPosition(skellyX, skellyY);
-
 }
 // Checks for a collision at the next tile
 point<int> Skeleton::GetNextPos(const Vector2D &direction)
@@ -96,4 +100,19 @@ void Skeleton::Enter(Level* room)
 {
 	currentRoom = room;
 	room->SetEnemies(this);
+}
+
+void Skeleton::Lacerate(SDL_Rect hitter)
+{
+	Rectangle *r1 = new Rectangle(hitter.x, hitter.y, hitter.w, hitter.h);
+	Rectangle *r2 = new Rectangle(this->collider.x, this->collider.y, this->collider.w, this->collider.h);
+
+	if (r2->CollidesWith(r1))
+	{
+		this->isAlive = false;
+		this->SetVisible(false);
+	}
+	delete r2, r1;
+	r2 = nullptr;
+	r1 = nullptr;
 }

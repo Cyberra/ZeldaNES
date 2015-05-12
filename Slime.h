@@ -18,6 +18,7 @@ public:
 	// Sets the direction in which the enemy is moving
 	void SetDirection(Vector2D whereIGo){ direction = whereIGo; }
 
+	void Lacerate(SDL_Rect hitter);
 
 private:
 	// Int used to change the direction of the enemy.

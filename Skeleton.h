@@ -17,6 +17,8 @@ public:
 	void Update();
 	// Sets the direction in which the enemy is moving
 	void SetDirection(Vector2D whereIGo){ direction = whereIGo; }
+	// Takes the sword's collider (or whatever projectile) and kills enemy if collision
+	void Lacerate(SDL_Rect hitter);
 
 
 private:

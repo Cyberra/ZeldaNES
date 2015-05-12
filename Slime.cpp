@@ -5,7 +5,7 @@ Slime::Slime()
 	: Enemies(Texture::ID::Slime, NUM_OF_FRAMES(), ANIM_DEFAULT_SPEED, SLIMEY_ANIM_SRC(), FRAME_SIZE())
 	, direction(0.0f, -1.0f)
 	, slimeyX(820)
-	, slimeyY(954)
+	, slimeyY(640)
 	, moveTimer(0)
 	, randomizer(0)
 	, isAlive(true)
@@ -81,6 +81,23 @@ point<int> Slime::GetNextPos(const Vector2D &direction)
 	p.x = slimeyX + direction.x;
 	p.y = slimeyY + direction.y;
 	return p;
+}
+void Slime::Lacerate(SDL_Rect hitter)
+{
+	// Seeing as the collision detection system takes rectangles, let's convert our
+	// collider and hitter as such.
+	Rectangle *r1 = new Rectangle(hitter.x, hitter.y, hitter.w, hitter.h);
+	Rectangle *r2 = new Rectangle(this->collider.x, this->collider.y, this->collider.w, this->collider.h);
+
+	if (r2->CollidesWith(r1))
+	{
+		// This "kills" the enemy so that it no longer appears as being on the screen
+		this->isAlive = false;
+		this->SetVisible(false);
+	}
+	delete r2, r1;
+	r2 = nullptr;
+	r1 = nullptr;
 }
 void Slime::ChangeDirection(int choice)
 {
