@@ -108,6 +108,7 @@
     <ClCompile Include="RoomTriforce.cpp" />
     <ClCompile Include="RoomUnderground.cpp" />
     <ClCompile Include="Skeleton.cpp" />
+    <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileManager.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="RoomTriforce.h" />
     <ClInclude Include="RoomUnderground.h" />
     <ClInclude Include="Skeleton.h" />
+    <ClInclude Include="Slime.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileManager.h" />
     <ClInclude Include="ZeldaNES.h" />

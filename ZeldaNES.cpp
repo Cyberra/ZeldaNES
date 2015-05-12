@@ -38,6 +38,10 @@ ZeldaNES::ZeldaNES()
 	//Textures
 	Textures->LoadTexture(Texture::ID::LinkAnims, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::Stalfo, "Textures/ZeldaSprites.png");
+	Textures->LoadTexture(Texture::ID::Slime, "Textures/ZeldaSprites.png");
+	Textures->LoadTexture(Texture::ID::MoblinBlue, "Textures/ZeldaSprites.png");
+	Textures->LoadTexture(Texture::ID::MoblinRed, "Textures/ZeldaSprites.png");
+	Textures->LoadTexture(Texture::ID::Aquamentis, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::Dot, "Textures/dot.bmp");
 	Textures->LoadTexture(Texture::ID::Tile, "Textures/tiles.png");
 	Textures->LoadTexture(Texture::ID::DungeonRoom, "Textures/TilesForDungeonMap.png");
@@ -68,10 +72,12 @@ ZeldaNES::ZeldaNES()
 
 	link = new Link();
 	skelly = new Skeleton();
+	slimey = new Slime();
 
 	// Initialise game
 	actualRoom = rooms[0];
 	skelly->Enter(rooms[0]);
+	slimey->Enter(rooms[0]);
 	link->Enter(rooms[0]);
 	link->Leave(rooms[1]);
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Skeleton.h"
+#include "Slime.h"
 #include "Link.h"
 #include "Room01.h"
 #include "Room02.h"
@@ -47,8 +48,10 @@ private:
 	
 
 	Level *actualRoom;
-	Level* rooms[18];
+	Level *rooms[18];
 	Link *link;
 	Skeleton *skelly;
+	Slime *slimey;
+	
 };
 

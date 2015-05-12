@@ -15,6 +15,10 @@ namespace Texture
 		Doors,
 		Triforce,
 		Stalfo,
+		Slime,
+		MoblinBlue,
+		MoblinRed,
+		Aquamentis,
 		OpeningAnim
 	};
 }
