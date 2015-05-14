@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Skeleton.h"
+#include "Bomb.h"
 #include "Slime.h"
 #include "Link.h"
 #include "Room01.h"
@@ -52,6 +53,9 @@ private:
 	Link *link;
 	Skeleton *skelly;
 	Slime *slimey;
+	Bomb* Bombe;
+	Bomb* Smog;
+	Objects* objects;
 	
 };
 

@@ -49,6 +49,8 @@ ZeldaNES::ZeldaNES()
 	Textures->LoadTexture(Texture::ID::Doors, "Textures/DungeonDoors.png");
 	Textures->LoadTexture(Texture::ID::Triforce, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::HeartDrop, "Textures/ZeldaSprites.png");
+	Textures->LoadTexture(Texture::ID::Bombe, "Textures/ZeldaSprites.png");
+	Textures->LoadTexture(Texture::ID::Smog, "Textures/ZeldaSprites.png");
 
 	// Render order
 	rooms[0]  = new Room01();
@@ -162,6 +164,11 @@ void ZeldaNES::Update()
 	{
 		TravelTo(actualRoom, rooms[10], 0);
 		actualRoom = rooms[10];
+	}
+	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_B))
+	{
+		Bombe = new Bomb();
+		Bombe->Update();
 	}
 
 	UpdateCamera();

@@ -80,6 +80,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Boomerang.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Enemies.cpp" />
@@ -115,6 +116,7 @@
     <ClCompile Include="ZeldaNES.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="Boomerang.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Enemies.h" />

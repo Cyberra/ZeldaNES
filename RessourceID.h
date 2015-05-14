@@ -16,6 +16,8 @@ namespace Texture
 		Triforce,
 		Stalfo,
 		Slime,
+		Bombe,
+		Smog,
 		MoblinBlue,
 		MoblinRed,
 		Aquamentis,
