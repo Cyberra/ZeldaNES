@@ -6,8 +6,7 @@
 #include "Link.h"
 #include <iostream>
 class Bomb
-	: public Objects
-	, public Sprite
+	: public Objects, public Sprite
 
 {
 public:
@@ -26,6 +25,8 @@ public:
 	Rectangle rec3;
 	Bomb* Bombe;
 	Bomb* Smog;
+	Link* link;
+	Sprite* sprite;
 	
 	int bombX, bombY;
 	bool Visible;
@@ -41,7 +42,7 @@ private:
 	SDL_Rect box;
 	const int domage = 3;
 	bool isCollect;
-
+	int inventaire;
 
 	const int SMOG_NB_FRAME() { return 2; }
 	const point<int> SMOG_NB_POSITION(){ return{ 80, 32 }; }

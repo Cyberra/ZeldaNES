@@ -167,8 +167,10 @@ void ZeldaNES::Update()
 	}
 	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_B))
 	{
+
 		Bombe = new Bomb();
-		Bombe->Update();
+		//Bombe->Update();
+		Bombe->TouchesBomb();
 	}
 
 	UpdateCamera();
