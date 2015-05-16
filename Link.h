@@ -17,7 +17,8 @@ public:
 
 	// Getter
 	Level const *GetRoom() { return actualRoom; }
-	float const GetLinkHealth() { return linkHealth; }
+	int const GetLinkHealth() { return linkHealth; }
+	int const GetLinkMaxHealth() { return linkMaxHealth; }
 
 	point<int> GetNextPos(const Vector2D &direction);
 
@@ -41,6 +42,7 @@ private:
 
 	// Stats
 	float linkHealth;
+	float linkMaxHealth;
 
 	// States used by Link.
 	enum state {

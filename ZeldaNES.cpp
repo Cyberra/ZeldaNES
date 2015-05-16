@@ -76,6 +76,8 @@ ZeldaNES::ZeldaNES()
 	link = new Link();
 	skelly = new Skeleton();
 	slimey = new Slime();
+	mobRed = new MoblinRed();
+	mobBlue = new MoblinBlue();
 
 	// HUD
 	//hud = new Hud(link*);

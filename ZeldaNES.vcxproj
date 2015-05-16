@@ -88,6 +88,8 @@
     <ClCompile Include="Hud.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Link.cpp" />
+    <ClCompile Include="MoblinBlue.cpp" />
+    <ClCompile Include="MoblinRed.cpp" />
     <ClCompile Include="Objects.cpp" />
     <ClCompile Include="OpeningScreen.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -126,6 +128,8 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="Libraries.h" />
     <ClInclude Include="Link.h" />
+    <ClInclude Include="MoblinBlue.h" />
+    <ClInclude Include="MoblinRed.h" />
     <ClInclude Include="Objects.h" />
     <ClInclude Include="OpeningScreen.h" />
     <ClInclude Include="Player.h" />

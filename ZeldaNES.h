@@ -3,6 +3,8 @@
 #include "Skeleton.h"
 #include "Bomb.h"
 #include "Slime.h"
+#include "MoblinRed.h"
+#include "MoblinBlue.h"
 #include "Link.h"
 #include "Room01.h"
 #include "Room02.h"
@@ -55,6 +57,8 @@ private:
 	Link *link;
 	Skeleton *skelly;
 	Slime *slimey;
+	MoblinRed *mobRed;
+	MoblinBlue *mobBlue;
 	Bomb* Bombe;
 	Bomb* Smog;
 	Objects* objects;
