@@ -5,6 +5,7 @@
 #include "Slime.h"
 #include "MoblinRed.h"
 #include "MoblinBlue.h"
+#include "Bats.h"
 #include "Link.h"
 #include "Room01.h"
 #include "Room02.h"
@@ -59,6 +60,7 @@ private:
 	Slime *slimey;
 	MoblinRed *mobRed;
 	MoblinBlue *mobBlue;
+	Bats *bats;
 	Bomb* Bombe;
 	Bomb* Smog;
 	Objects* objects;

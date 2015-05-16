@@ -2,14 +2,14 @@
 #include "Enemies.h"
 #include "Level.h"
 
-class MoblinBlue :
+class Bats :
 	public Enemies
 {
 public:
-	MoblinBlue();
-	~MoblinBlue();
+	Bats();
+	~Bats();
 
-	// Getter for the room in which the Blue Moblin spawns
+	// Getter for the room in which the Bats spawns
 	Level const *GetRoom() { return currentRoom; }
 	// Room setter
 	void Enter(Level* room);
@@ -30,7 +30,7 @@ private:
 	bool isAlive;
 	bool isStunned;
 
-	// Room in which the Blue Moblin spawn
+	// Room in which the Bats spawn
 	Level* currentRoom;
 
 	// Directional vector that he's moving in
@@ -41,8 +41,8 @@ private:
 	const Vector2D LEFT{ -1, 0 };
 
 	// His coords
-	float mobBlueX;
-	float mobBlueY;
+	float batsX;
+	float batsY;
 
 	float moveTimer;
 
@@ -56,11 +56,11 @@ private:
 	// Method that moves the collider for a single frame to check for collisions
 	void MoveCollider(const Vector2D &direction);
 	// Used to check the collision of the next position
-	point<int> MoblinBlue::GetNextPos(const Vector2D &direction);
+	point<int> Bats::GetNextPos(const Vector2D &direction);
 
-	// Animation related stuff ---- TO DO
+	// Animation related stuff
 	const int NUM_OF_FRAMES()					{ return 2; }
 	const point<int> FRAME_SIZE()				{ return{ 16, 16 }; };
-	const point<int> MOB_BLUE_ANIM_SRC()		{ return{ 64, 80 }; };
+	const point<int> BATS_ANIM_SRC()			{ return{ 0, 112 }; };
 };
 

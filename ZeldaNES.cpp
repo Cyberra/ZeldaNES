@@ -41,6 +41,7 @@ ZeldaNES::ZeldaNES()
 	Textures->LoadTexture(Texture::ID::Slime, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::MoblinBlue, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::MoblinRed, "Textures/ZeldaSprites.png");
+	Textures->LoadTexture(Texture::ID::Bats, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::Aquamentis, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::Dot, "Textures/dot.bmp");
 	Textures->LoadTexture(Texture::ID::Tile, "Textures/tiles.png");
@@ -78,6 +79,7 @@ ZeldaNES::ZeldaNES()
 	slimey = new Slime();
 	mobRed = new MoblinRed();
 	mobBlue = new MoblinBlue();
+	bats = new Bats();
 
 	// HUD
 	//hud = new Hud(link*);
