@@ -17,6 +17,7 @@ public:
 
 	// Getter
 	Level const *GetRoom() { return actualRoom; }
+	float const GetLinkHealth() { return linkHealth; }
 
 	point<int> GetNextPos(const Vector2D &direction);
 
@@ -37,6 +38,9 @@ private:
 
 	// Speed of the Dot
 	const float SPEED;
+
+	// Stats
+	float linkHealth;
 
 	// States used by Link.
 	enum state {

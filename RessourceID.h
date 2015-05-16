@@ -23,7 +23,20 @@ namespace Texture
 		Aquamentis,
 		OpeningAnim
 	};
+
+	enum HUD
+	{
+		Hud,
+		RedHeart,
+		WhiteHeart,
+		HalfHeart,
+		Sword,
+		Bomb,
+		BossMapDot,
+		LinkMapDot
+	};
 }
+
 namespace Sound
 {
 	enum ID

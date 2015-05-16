@@ -23,6 +23,7 @@
 #include "RoomTriforce.h"
 #include "RoomUnderground.h"
 #include "Camera.h"
+#include "Hud.h"
 
 class ZeldaNES :
 	public Component
@@ -50,12 +51,14 @@ private:
 
 	Level *actualRoom;
 	Level *rooms[18];
+	Hud *hud;
 	Link *link;
 	Skeleton *skelly;
 	Slime *slimey;
 	Bomb* Bombe;
 	Bomb* Smog;
 	Objects* objects;
+	
 	
 };
 

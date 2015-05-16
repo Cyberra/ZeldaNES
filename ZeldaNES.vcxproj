@@ -85,6 +85,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="HeartDrop.cpp" />
+    <ClCompile Include="Hud.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Link.cpp" />
     <ClCompile Include="Objects.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="HeartDrop.h" />
+    <ClInclude Include="Hud.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Libraries.h" />
     <ClInclude Include="Link.h" />

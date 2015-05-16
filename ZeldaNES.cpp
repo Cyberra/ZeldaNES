@@ -76,6 +76,8 @@ ZeldaNES::ZeldaNES()
 	skelly = new Skeleton();
 	slimey = new Slime();
 
+	//hud = new Hud(link);
+
 	// Initialise game
 	actualRoom = rooms[0];
 	skelly->Enter(rooms[0]);
