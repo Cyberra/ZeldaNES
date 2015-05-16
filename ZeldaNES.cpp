@@ -72,11 +72,13 @@ ZeldaNES::ZeldaNES()
 	rooms[16] = new RoomTriforce();
 	rooms[17] = new RoomUnderground();
 
+	// Characters
 	link = new Link();
 	skelly = new Skeleton();
 	slimey = new Slime();
 
-	//hud = new Hud(link);
+	// HUD
+	//hud = new Hud(link*);
 
 	// Initialise game
 	actualRoom = rooms[0];
