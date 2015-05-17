@@ -8,8 +8,6 @@ TileManager::TileManager()
 
 point<int> TileManager::GetOffSet(const std::string map)
 {
-	point<int> offSet;
-
 	if (map == "Room01.map")
 	{
 		offSet.x = 732; 
@@ -106,6 +104,7 @@ point<int> TileManager::GetOffSet(const std::string map)
 
 TileManager::TileManager(std::string mapPath)
 	:isInitialized(false)
+	, offSet(0, 0)
 {
 	//Success flag
 	bool tilesLoaded = true;

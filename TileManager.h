@@ -36,6 +36,7 @@ public:
 
 protected:
 	// The array of all the tiles 1D for simplicity purpose
+	point<int> offSet;
 	std::vector<Sprite*> walls;
 	std::vector<Sprite*>::iterator iterWalls;
 	Tile *tiles[TOTAL_TILES];

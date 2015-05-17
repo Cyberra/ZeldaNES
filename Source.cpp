@@ -11,8 +11,6 @@ int main(int argc, char* args[])
 	
 	ZeldaNES* zeldaNES = new ZeldaNES();
 	
-
-	
 	cEngine->Run();
 
 	cEngine->ClearComponents();
