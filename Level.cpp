@@ -2,21 +2,19 @@
 
 Level::Level()
 : player(nullptr)
-, enemy(nullptr)
 {
 }
 
 Level::Level(const std::string mapPath)
 	: TileManager(mapPath)
 	, player(nullptr)
-	, enemy(nullptr)
-
 {
 
 }
 
 Level::~Level()
 {
+	enemy.clear();
 	//for (int i = 0; i < TOTAL_TILES; i++)
 	//{
 	//	delete tiles[i];
@@ -30,8 +28,13 @@ void Level::Update()
 	{
 		player->Move(this);
 	}
-	if (enemy != nullptr)
+	
+	for (iter = enemy.begin(); iter != enemy.end(); ++iter)
 	{
-		enemy->Move(this);
+		if ((*iter) != nullptr)
+		{
+			(*iter)->Move(this);
+		}
 	}
+	
 }

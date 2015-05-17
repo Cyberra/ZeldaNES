@@ -232,14 +232,17 @@ void ZeldaNES::SwitchState(GameStates state)
 			skelly	    ->SetActive(true);
 			slimey	    ->SetActive(true);
 			link	    ->SetActive(true);
-			bats	    ->SetActive(true);
-			mobRed	    ->SetActive(true);
-			mobBlue	    ->SetActive(true);
+			bats		->SetActive(true);
+			mobRed		->SetActive(true);
+			mobBlue		->SetActive(true);
 			currentRoom->SetActive(true);
-			skelly->Enter(rooms[0]);
-			slimey->Enter(rooms[0]);
-			link->Enter(rooms[0]);
-			link->Leave(rooms[1]);
+			skelly	->Enter(rooms[0]);
+			slimey	->Enter(rooms[0]);
+			bats	->Enter(rooms[0]);
+			mobRed	->Enter(rooms[0]);
+			mobBlue	->Enter(rooms[0]);
+			link	->Enter(rooms[0]);
+			link	->Leave(rooms[1]);
 			break;
 		case (Title) :
 			titleScreen->Start();
