@@ -113,6 +113,25 @@ void ZeldaNES::Update()
 {
 	HandleInputs();
 	UpdateCamera();
+	
+	//Here's my idea of the logic behind it.
+	// I can only think of making a collider for each room and when Link's
+	// collider overlaps the other room, he "travels" to it.
+	//if (link->GetCurrentPos().x == rooms[0]->GetOffSet("Room01.map").x &&
+	//	link->GetCurrentPos().y == rooms[0]->GetOffSet("Room01.map").y)
+	//{
+	//	TravelTo(rooms[1], 0);
+	//}
+	//else if (link->GetCurrentPos().x == rooms[1]->GetOffSet("Room02.map").x)
+	//{
+	//	TravelTo(rooms[2], 0);
+	//}
+	//if (link->GetCurrentPos().x == rooms[2]->GetOffSet("Room03.map").x)
+	//{
+	//	TravelTo(rooms[3], 0);
+	//}
+	
+
 }
 
 void ZeldaNES::Stop()

@@ -14,7 +14,11 @@ Level::Level(const std::string mapPath)
 
 Level::~Level()
 {
-	enemy.clear();
+	auto it = enemy.begin();
+	while (it != enemy.end())
+	{
+		it = enemy.erase(it);
+	}
 }
 
 void Level::Update()
