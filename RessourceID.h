@@ -76,7 +76,7 @@ namespace Music
 	};
 }
 
-namespace Font 
+namespace Font
 {
 	enum ID
 	{
@@ -84,6 +84,5 @@ namespace Font
 	};
 
 }
-
 
 #endif

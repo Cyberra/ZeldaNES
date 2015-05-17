@@ -1,13 +1,20 @@
+#pragma once 
+
 #include "Libraries.h"
-#include "Animation.h"
 #include "Rectangle.h"
-#include "Objects.h"
+#include "Object.h"
 #include "Tile.h"
 #include "Link.h"
 #include <iostream>
-class Bomb
-	: public Objects, public Sprite
 
+////////////////////////////////////////////////////////
+//Object: Bomb
+//Droppable object that explodes after a few moment
+//As of right now, using this makes the project go boom.
+////////////////////////////////////////////////////////
+
+class Bomb
+	: public Object
 {
 public:
 	Bomb();
@@ -23,8 +30,8 @@ public:
 	Rectangle rec1;
 	Rectangle rec2;
 	Rectangle rec3;
-	Bomb* Bombe;
-	Bomb* Smog;
+	Sprite* bombe;
+	Animation* smog;
 	Link* link;
 	Sprite* sprite;
 	
@@ -34,7 +41,7 @@ public:
 private:
 	
 	int width, heigth;
-	float SmogX, SmogY;
+	float smogX, smogY;
 	float currentTime;
 	int framerate;
 	bool isPlaying;

@@ -6,6 +6,10 @@
 #include "PoolObject.h"
 #include "Rectangle.h"
 
+/////////////////////////////////////////////
+// Object: Heartdrop
+// Grab these to recover some your health...
+/////////////////////////////////////////////
 
 class HeartDrop
 	: public Sprite, public PoolObject<HeartDrop>//the pool we draw the hearts from
@@ -30,7 +34,7 @@ public:
 private:
 	int x, y;
 	
-	//Collider
+	//Colliders
 	SDL_Rect hCollider;
 	SDL_Rect linkRect;
 };

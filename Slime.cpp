@@ -1,55 +1,50 @@
 #include "Slime.h"
 
+const int SPAWN_X = 820;
+const int SPAWN_Y = 640;
 
 Slime::Slime()
-	: Enemies(Texture::ID::Slime, NUM_OF_FRAMES(), ANIM_DEFAULT_SPEED, SLIMEY_ANIM_SRC(), FRAME_SIZE())
-	, direction(0.0f, -1.0f)
-	, slimeyX(820)
-	, slimeyY(640)
-	, moveTimer(0)
-	, randomizer(0)
-	, isAlive(true)
-	, isStunned(false)
-	, currentRoom(nullptr)
+	: Enemy(Texture::ID::Slime, NUM_OF_FRAMES(), ANIM_DEFAULT_SPEED, SLIMEY_ANIM_SRC(), FRAME_SIZE())
 {
-	SetPosition(slimeyX, slimeyY);
+	xPos = SPAWN_X;
+	yPos = SPAWN_Y;
+	SetPosition(SPAWN_X, SPAWN_Y);
 	this->Play();
 	this->SetIsLooping(true);
+
+	// Sets the Slime's collider
 	collider.h = (FRAME_SIZE().x / 3);
 	collider.w = (FRAME_SIZE().y / 3);
-	collider.x = ((int)slimeyX / 3);
-	collider.y = ((int)slimeyX / 3);
+	collider.x = ((int)xPos / 3);
+	collider.y = ((int)xPos / 3);
+
 	// Sets the moverBox to the Slime's location
 	moverBox.h = FRAME_SIZE().x;
 	moverBox.w = FRAME_SIZE().y;
-	moverBox.x = (int)slimeyX;
-	moverBox.y = (int)slimeyY;
+	moverBox.x = (int)xPos;
+	moverBox.y = (int)yPos;
 }
 
 Slime::~Slime()
 {
-	delete currentRoom;
 }
 
 void Slime::Update()
 {
 	Animation::Update();
 	randomizer = rand() % 4;
-	// keeps mover box at the right coordinates all the time.
-	moverBox.x = slimeyX;
-	moverBox.y = slimeyY;
+	// Keeps mover box at the right coordinates all the time.
+	moverBox.x = (int)xPos;
+	moverBox.y = (int)yPos;
 	// Keeps the slime's collider at the right place at the same time.
-	collider.x = ((int)slimeyX / 3);
-	collider.y = ((int)slimeyX / 3);
+	collider.x = ((int)xPos / 3);
+	collider.y = ((int)xPos / 3);
 
 }
-// Move the collider
-void Slime::MoveCollider(const Vector2D &direction)
-{
-	moverBox.x = GetNextPos(direction).x;
-	moverBox.y = GetNextPos(direction).y;
-}
 
+// Moves the slime
+// Picks a random direction based upon randomizer.
+// It'll change direction upon colliding with a wall.
 void Slime::Move(TileManager* tm)
 {
 	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
@@ -62,65 +57,20 @@ void Slime::Move(TileManager* tm)
 	}
 	if (tm->TouchesWall(moverBox))
 	{
-		slimeyX -= direction.x;
-		slimeyY -= direction.y;
+		xPos -= direction.x;
+		yPos -= direction.y;
 		ChangeDirection(randomizer);
 	}
 	else
 	{
-		slimeyX += (direction.x * 40) * dt;
-		slimeyY += (direction.y * 40) * dt;
+		xPos += (direction.x * 40) * dt;
+		yPos += (direction.y * 40) * dt;
 	}
-	SetPosition(slimeyX, slimeyY);
+	SetPosition((int)xPos, (int)yPos);
+}
 
-}
-// Checks for a collision at the next tile
-point<int> Slime::GetNextPos(const Vector2D &direction)
-{
-	point<int> p;
-	p.x = slimeyX + direction.x;
-	p.y = slimeyY + direction.y;
-	return p;
-}
-void Slime::Lacerate(SDL_Rect hitter)
-{
-	// Seeing as the collision detection system takes rectangles, let's convert our
-	// collider and hitter as such.
-	Rectangle *r1 = new Rectangle(hitter.x, hitter.y, hitter.w, hitter.h);
-	Rectangle *r2 = new Rectangle(this->collider.x, this->collider.y, this->collider.w, this->collider.h);
-
-	if (r2->CollidesWith(r1))
-	{
-		// This "kills" the enemy so that it no longer appears as being on the screen
-		this->isAlive = false;
-		this->SetVisible(false);
-	}
-	delete r2, r1;
-	r2 = nullptr;
-	r1 = nullptr;
-}
-void Slime::ChangeDirection(int choice)
-{
-	switch (choice)
-	{
-	case NORTH:
-		SetDirection(UP);
-		break;
-	case EAST:
-		SetDirection(RIGHT);
-		break;
-	case SOUTH:
-		SetDirection(DOWN);
-		break;
-	case WEST:
-		SetDirection(LEFT);
-		break;
-	default:
-		break;
-	}
-}
 void Slime::Enter(Level* room)
 {
 	currentRoom = room;
-	room->SetEnemies(this);
+	room->SetEnemy(this);
 }

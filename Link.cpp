@@ -1,18 +1,19 @@
 #include "Link.h"
 
 Link::Link()
-	: Player(Texture::ID::LinkAnims, WALK_NB_FRAME(), 0, WALK_DOWN_START_SRC(), FRAME_SIZE())
-	, linkX(820)
-	, linkY(954)
+	: Animation(Texture::ID::LinkAnims, WALK_NB_FRAME(), 0, WALK_DOWN_START_SRC(), FRAME_SIZE())
+
 	, linkMaxHealth(6) // Starting Health is 3 hearts that can be taken down to a half each (3x2=6)
 	, linkHealth(linkMaxHealth)
 	, SPEED(100.0f)
 	, attackTimer(0.0f)
 	, boomerangPool(nullptr)
-	, actualBoomerang(nullptr)
-	, actualRoom(nullptr)
+	, boomerang(nullptr)
+	, currentRoom(nullptr)
 {
-	SetPosition(linkX, linkY);
+	xPos = 820;
+	yPos = 954;
+	SetPosition((int)xPos, (int)yPos);
 
 	//Start the animation on creation
 	this->Play();
@@ -22,16 +23,14 @@ Link::Link()
 	collider.w = LINK_WIDTH;
 	collider.h = LINK_HEIGHT;
 
-	collider.x = (int)linkX + LINK_WIDTH / 2;
-	collider.y = (int)linkY + LINK_HEIGHT / 2;
+	collider.x = (int)xPos + LINK_WIDTH / 2;
+	collider.y = (int)yPos + LINK_HEIGHT / 2;
 }
 
 Link::~Link()
 {
-	delete actualRoom;
-	delete boomerangPool;
 	boomerangPool = nullptr;
-	actualRoom = nullptr;
+	currentRoom = nullptr;
 }
 
 void Link::changeState(state newState)
@@ -121,27 +120,27 @@ void Link::changeState(state newState)
 	}
 }
 
-point<int> Link::GetNextPos(const Vector2D &direction)
+point<int> const Link::GetNextPos(const Vector2D &direction)
 {
 	point<int> p;
 
-	p.x = linkX + direction.x;
-	p.y = linkY + direction.y;
+	p.x = (int)(xPos + direction.x);
+	p.y = (int)(yPos + direction.y);
 
 	return p;
 }
 
 void Link::Enter(Level* room)
 {
-	actualRoom = room;
-	room->Show();
+	currentRoom = room;
+	room->SetActive(true);
 	room->SetPlayer(this);
 }
 
 void Link::Leave(Level* room)
 {
 	room->SetPlayer(nullptr);
-	room->Hide();
+	room->SetActive(false);
 }
 
 // Move and check collision
@@ -158,25 +157,25 @@ void Link::Move(TileManager* tm)
 	MoveBox(direction);
 
 	//Move link left or right
-	linkX += (SPEED * direction.x) * dt;
+	xPos += (SPEED * direction.x) * dt;
 
 	//If link went too far to the left or right or touched a wall
 	if (tm->TouchesWall(collider)) //<---This the function to check collision (TouchesWall)
 	{
 		//move back
-		linkX -= (SPEED * direction.x) * dt;
+		xPos -= (SPEED * direction.x) * dt;
 	}
 
 	//Move the link up or down
-	linkY += (SPEED * direction.y) * dt;
+	yPos += (SPEED * direction.y) * dt;
 
 	//If link went too far up or down or touched a wall
 	if (tm->TouchesWall(collider))
 	{
 		//move back
-		linkY -= (SPEED * direction.y) * dt;
+		yPos -= (SPEED * direction.y) * dt;
 	}
-	SetPosition(linkX, linkY);
+	SetPosition((int)xPos, (int)yPos);
 }
 
 // Move the collider
@@ -343,7 +342,7 @@ void Link::Update()
 	Animation::Update();
 
 	// Updates position of the player.
-	SetPosition((int)linkX, (int)linkY);
+	SetPosition((int)xPos, (int)yPos);
 
 	//////////////////////////////////////////////
 	// CONTROLS USED FOR LINK
@@ -353,28 +352,28 @@ void Link::Update()
 	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W))
 	{
 		changeState(WALK_UP);
-		linkY--;
+		yPos--;
 	}
 
 	// A
 	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A))
 	{
 		changeState(WALK_LEFT);
-		linkX--;
+		xPos--;
 	}
 
 	// S
 	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S))
 	{
 		changeState(WALK_DOWN);
-		linkY++;
+		yPos++;
 	}
 
 	// D
 	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D))
 	{
 		changeState(WALK_RIGHT);
-		linkX++;
+		xPos++;
 	}
 
 	// KP 1

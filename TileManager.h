@@ -1,8 +1,8 @@
 #pragma once
 
-/*
-	This is the class that contains all the tiles and check for collision of a given object !
-*/
+//////////////////////////////////////////////////////////////////////////////////////////
+//This is the class that contains all the tiles and check for collision of a given object!
+//////////////////////////////////////////////////////////////////////////////////////////
 
 #include "Libraries.h"
 #include "Tile.h"
@@ -19,6 +19,8 @@ public:
 	static const int TOTAL_TILES = 84;
 	static const int TOTAL_TILE_SPRITES = 19;
 
+	virtual void SetActive(bool toggle);
+
 	TileManager();
 	TileManager(std::string mapPath);
 	~TileManager();
@@ -34,6 +36,8 @@ public:
 
 protected:
 	// The array of all the tiles 1D for simplicity purpose
+	std::vector<Sprite*> walls;
+	std::vector<Sprite*>::iterator iterWalls;
 	Tile *tiles[TOTAL_TILES];
 	bool isInitialized;
 };

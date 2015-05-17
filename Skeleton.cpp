@@ -1,29 +1,24 @@
 #include "Skeleton.h"
 
+const int SPAWN_X = 820;
+const int SPAWN_Y = 954;
 
 Skeleton::Skeleton()
-	: Enemies(Texture::ID::Stalfo, NUM_OF_FRAMES(), ANIM_DEFAULT_SPEED, SKELLY_ANIM_SRC(), FRAME_SIZE())
-	, direction(0.0f, -1.0f)
-	, skellyX(820)
-	, skellyY(954)
-	, moveTimer(0)
-	, randomizer(0)
-	, isAlive(true)
-	, isStunned(false)
-	, currentRoom(nullptr)
+	: Enemy(Texture::ID::Stalfo, NUM_OF_FRAMES(), ANIM_DEFAULT_SPEED, SKELLY_ANIM_SRC(), FRAME_SIZE())
 {
-	SetPosition(skellyX, skellyY);
+	xPos = SPAWN_X;
+	yPos = SPAWN_Y;
+	SetPosition(SPAWN_X, SPAWN_Y);
 	this->Play();
 	this->SetIsLooping(true);
 	collider.h = FRAME_SIZE().x;
 	collider.w = FRAME_SIZE().y;
-	collider.x = (int)skellyX;
-	collider.y = (int)skellyY;
+	collider.x = (int)xPos;
+	collider.y = (int)yPos;
 }
 
 Skeleton::~Skeleton()
 {
-	delete currentRoom;
 }
 
 void Skeleton::Update()
@@ -32,17 +27,12 @@ void Skeleton::Update()
 	{
 		Animation::Update();
 		randomizer = rand() % 4;
-		collider.x = skellyX;
-		collider.y = skellyY;
+		collider.x = (int)xPos;
+		collider.y = (int)yPos;
 	}
 }
-// Move the collider
-void Skeleton::MoveCollider(const Vector2D &direction)
-{
-	collider.x = GetNextPos(direction).x;
-	collider.y = GetNextPos(direction).y;
-}
 
+//Moves the skeleton, changes di
 void Skeleton::Move(TileManager* tm)
 {
 	if (isAlive)
@@ -56,63 +46,20 @@ void Skeleton::Move(TileManager* tm)
 		}
 		if (tm->TouchesWall(collider))
 		{
-			skellyX -= direction.x;
-			skellyY -= direction.y;
+			xPos -= direction.x;
+			yPos -= direction.y;
 			ChangeDirection(randomizer);
 		}
 		else
 		{
-			skellyX += (direction.x * 40) * dt;
-			skellyY += (direction.y * 40) * dt;
+			xPos += (direction.x * 40) * dt;
+			yPos += (direction.y * 40) * dt;
 		}
-		SetPosition(skellyX, skellyY);
-	}
-}
-// Checks for a collision at the next tile
-point<int> Skeleton::GetNextPos(const Vector2D &direction)
-{
-	point<int> p;
-	p.x = skellyX + direction.x;
-	p.y = skellyY + direction.y;
-	return p;
-}
-void Skeleton::ChangeDirection(int choice)
-{
-	switch (choice)
-	{
-	case NORTH:
-		SetDirection(UP);
-		break;
-	case EAST:
-		SetDirection(RIGHT);
-		break;
-	case SOUTH:
-		SetDirection(DOWN);
-		break;
-	case WEST:
-		SetDirection(LEFT);
-		break;
-	default:
-		break;
+		SetPosition((int)xPos, (int)yPos);
 	}
 }
 void Skeleton::Enter(Level* room)
 {
 	currentRoom = room;
-	room->SetEnemies(this);
-}
-
-void Skeleton::Lacerate(SDL_Rect hitter)
-{
-	Rectangle *r1 = new Rectangle(hitter.x, hitter.y, hitter.w, hitter.h);
-	Rectangle *r2 = new Rectangle(this->collider.x, this->collider.y, this->collider.w, this->collider.h);
-
-	if (r2->CollidesWith(r1))
-	{
-		this->isAlive = false;
-		this->SetVisible(false);
-	}
-	delete r2, r1;
-	r2 = nullptr;
-	r1 = nullptr;
+	room->SetEnemy(this);
 }

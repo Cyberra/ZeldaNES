@@ -9,6 +9,7 @@
 
 #include "Engine.h"
 #include "Sprite.h"
+#include "Animation.h"
 #include "Text.h"
 #include "Audio.h"
 #include "RessourceID.h"

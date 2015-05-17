@@ -1,6 +1,8 @@
 #include "Level.h"
 
 Level::Level()
+: player(nullptr)
+, enemy(nullptr)
 {
 }
 
@@ -31,21 +33,5 @@ void Level::Update()
 	if (enemy != nullptr)
 	{
 		enemy->Move(this);
-	}
-}
-
-void Level::Hide()
-{
-	for (int i = 0; i < TOTAL_TILES; i++)
-	{
-		tiles[i]->SetVisible(false);
-	}
-}
-
-void Level::Show()
-{
-	for (int i = 0; i < TOTAL_TILES; i++)
-	{
-		tiles[i]->SetVisible(true);
 	}
 }

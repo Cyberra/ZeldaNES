@@ -1,5 +1,13 @@
 #pragma once
+
 #include "Sprite.h"
+
+///////////////////////////////////////////////////////////////////////////
+// HUD
+// This should display the hud located near the upper portion of the screen.
+// >should<
+///////////////////////////////////////////////////////////////////////////
+
 class Hud :
 	public Sprite
 {
@@ -21,7 +29,7 @@ public:
 
 private:
 
-	// Info needed
+	// Redundant, should use link's health.
 	int linkHealth;
 	int linkMaxHealth;
 

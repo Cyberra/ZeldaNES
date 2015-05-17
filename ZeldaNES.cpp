@@ -3,8 +3,10 @@
 //Creating camera
 Camera* ZeldaNES::camera = new Camera();
 
+const int NB_ROOMS = 18;
 
 ZeldaNES::ZeldaNES()
+:currentState(None)
 {
 	// Loading resources
 	//Sounds
@@ -34,6 +36,7 @@ ZeldaNES::ZeldaNES()
 
 	//Music
 	Musics->LoadMusic(Music::ID::Dungeon, "Music/DungeonTheme.mp3");
+	Musics->LoadMusic(Music::ID::Title, "Music/TitleTheme.mp3");
 
 	//Textures
 	Textures->LoadTexture(Texture::ID::LinkAnims, "Textures/ZeldaSprites.png");
@@ -44,7 +47,6 @@ ZeldaNES::ZeldaNES()
 	Textures->LoadTexture(Texture::ID::Bats, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::Aquamentis, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::Dot, "Textures/dot.bmp");
-	Textures->LoadTexture(Texture::ID::Tile, "Textures/tiles.png");
 	Textures->LoadTexture(Texture::ID::DungeonRoom, "Textures/TilesForDungeonMap.png");
 	Textures->LoadTexture(Texture::ID::Walls, "Textures/DungeonWalls.png");
 	Textures->LoadTexture(Texture::ID::Doors, "Textures/DungeonDoors.png");
@@ -52,6 +54,10 @@ ZeldaNES::ZeldaNES()
 	Textures->LoadTexture(Texture::ID::HeartDrop, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::Bombe, "Textures/ZeldaSprites.png");
 	Textures->LoadTexture(Texture::ID::Smog, "Textures/ZeldaSprites.png");
+	Textures->LoadTexture(Texture::ID::OpeningAnim, "Textures/OpenAnim.jpg");
+
+	// Fonts
+	Fonts->LoadFont(Font::ID::tempFont, "Fonts/FFTA_55.ttf", 21);
 
 	// Render order
 	rooms[0]  = new Room01();
@@ -73,6 +79,9 @@ ZeldaNES::ZeldaNES()
 	rooms[16] = new RoomTriforce();
 	rooms[17] = new RoomUnderground();
 
+	// Our title screen
+	titleScreen = new TitleScreen();
+
 	// Characters
 	link = new Link();
 	skelly = new Skeleton();
@@ -84,14 +93,7 @@ ZeldaNES::ZeldaNES()
 	// HUD
 	//hud = new Hud(link*);
 
-	// Initialise game
-	actualRoom = rooms[0];
-	skelly->Enter(rooms[0]);
-	slimey->Enter(rooms[0]);
-	link->Enter(rooms[0]);
-	link->Leave(rooms[1]);
-
-	camera->SetCameraPosition(400, 400);
+	Start();
 }
 
 ZeldaNES::~ZeldaNES()
@@ -100,90 +102,17 @@ ZeldaNES::~ZeldaNES()
 	camera = nullptr;
 }
 
+//As soon as the game start we start with the title screen
 void ZeldaNES::Start()
 {
-
+	SwitchState(Title);
 }
 
+//Every frame, handle inputs and update the camera
 void ZeldaNES::Update()
 {
-	// Press the associated number to see all Room.
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_Q))
-	{
-		TravelTo(actualRoom, rooms[0], 0);
-		actualRoom = rooms[0];
-	}
-
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_1))
-	{
-		TravelTo(actualRoom, rooms[1], 0);
-		actualRoom = rooms[1];
-	}
-
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_2))
-	{
-		TravelTo(actualRoom, rooms[2], 0);
-		actualRoom = rooms[2];
-	}
-
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_3))
-	{
-		TravelTo(actualRoom, rooms[3], 0);
-		actualRoom = rooms[3];
-	}
-
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_4))
-	{
-		TravelTo(actualRoom, rooms[4], 0);
-		actualRoom = rooms[4];
-	}
-
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_5))
-	{
-		TravelTo(actualRoom, rooms[5], 0);
-		actualRoom = rooms[5];
-	}
-
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_6))
-	{
-		TravelTo(actualRoom, rooms[6], 0);
-		actualRoom = rooms[6];
-	}
-
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_7))
-	{
-		TravelTo(actualRoom, rooms[7], 0);
-		actualRoom = rooms[7];
-	}
-
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_8))
-	{
-		TravelTo(actualRoom, rooms[8], 0);
-		actualRoom = rooms[8];
-	}
-
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_9))
-	{
-		TravelTo(actualRoom, rooms[9], 0);
-		actualRoom = rooms[9];
-	}
-
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_0))
-	{
-		TravelTo(actualRoom, rooms[10], 0);
-		actualRoom = rooms[10];
-	}
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_B))
-	{
-
-		Bombe = new Bomb();
-		//Bombe->Update();
-		Bombe->TouchesBomb();
-	}
-
+	HandleInputs();
 	UpdateCamera();
-
-
 }
 
 void ZeldaNES::Stop()
@@ -191,13 +120,142 @@ void ZeldaNES::Stop()
 
 }
 
-void ZeldaNES::TravelTo(Level* prevRoom, Level* nextRoom, const int direction)
+//Remove link's reference from the current room and add him to the specified one.
+//This also makes the new room the current active one.
+void ZeldaNES::TravelTo(Level* nextRoom, const int direction)
 {
-	link->Leave(prevRoom);
+	link->Leave(currentRoom);
 	link->Enter(nextRoom);
+	currentRoom = nextRoom;
 }
 
 void ZeldaNES::UpdateCamera()
 {
 	camera->SetCameraPosition(400, 400);
+}
+
+void ZeldaNES::HandleInputs()
+{
+	switch (currentState)
+	{
+	case (Title):
+	{
+		//From the main title press Enter to start the game
+		if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_RETURN))
+		{
+			SwitchState(Dungeon);
+		}
+		break;
+	}
+	case (Dungeon):
+	{
+		// Press the associated number to see all Room.
+		if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_Q))
+		{
+		 TravelTo(rooms[0], 0);
+		}
+		else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_1))
+		{
+		 TravelTo(rooms[1], 0);
+		}
+		else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_2))
+		{
+		 TravelTo(rooms[2], 0);
+		}
+		else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_3))
+		{
+		 TravelTo(rooms[3], 0);
+		}
+		else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_4))
+		{
+		 TravelTo(rooms[4], 0);
+		}
+		else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_5))
+		{
+		 TravelTo(rooms[5], 0);
+		}
+		else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_6))
+		{
+		 TravelTo(rooms[6], 0);
+		}
+		else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_7))
+		{
+		 TravelTo(rooms[7], 0);
+		}
+		else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_8))
+		{
+		 TravelTo(rooms[8], 0);
+		}
+		else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_9))
+		{
+		 TravelTo(rooms[9], 0);
+		}
+		else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_0))
+		{
+		 TravelTo(rooms[10], 0);
+		}
+		//Press B to deploy a bomb
+		if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_B))
+		{
+		 bomb = new Bomb();
+		 //bomb->Update();
+		 bomb->TouchesBomb();
+		}
+		//Press R to go back to the Title Screen
+		if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_R))
+		{
+			SwitchState(Title);
+		}
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+//Handle what happens upon changing the game state
+void ZeldaNES::SwitchState(GameStates state)
+{
+	if (currentState != state)
+	{
+		currentState = state;
+		switch (state)
+		{
+		case (Dungeon) :
+			currentRoom = rooms[0];
+			titleScreen->Stop();
+			AudioSys->PlayMusic(Musics->Get(Music::ID::Dungeon));
+			//for (int i = 0; i < NB_ROOMS; i++)
+			//{
+			//	rooms[i]->SetActive(true);
+			//}
+			skelly	    ->SetActive(true);
+			slimey	    ->SetActive(true);
+			link	    ->SetActive(true);
+			bats	    ->SetActive(true);
+			mobRed	    ->SetActive(true);
+			mobBlue	    ->SetActive(true);
+			currentRoom->SetActive(true);
+			skelly->Enter(rooms[0]);
+			slimey->Enter(rooms[0]);
+			link->Enter(rooms[0]);
+			link->Leave(rooms[1]);
+			break;
+		case (Title) :
+			titleScreen->Start();
+			for (int i = 0; i < NB_ROOMS; i++)
+			{
+				rooms[i]->SetActive(false);
+			}
+			skelly      ->SetActive(false);
+			slimey      ->SetActive(false);
+			link        ->SetActive(false);
+			bats        ->SetActive(false);
+			mobRed      ->SetActive(false);
+			mobBlue     ->SetActive(false);
+			break;
+		default:
+			break;
+		}
+	}
 }

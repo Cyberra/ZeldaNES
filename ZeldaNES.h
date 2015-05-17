@@ -1,5 +1,11 @@
 #pragma once
 
+////////////////////////////////////////////////////
+//ZeldaNES
+//This is our game instance. 
+//Pretty much all the meta logic is located over here.
+////////////////////////////////////////////////////
+
 #include "Skeleton.h"
 #include "Bomb.h"
 #include "Slime.h"
@@ -7,6 +13,7 @@
 #include "MoblinBlue.h"
 #include "Bats.h"
 #include "Link.h"
+#include "TitleScreen.h"
 #include "Room01.h"
 #include "Room02.h"
 #include "Room03.h"
@@ -28,6 +35,13 @@
 #include "Camera.h"
 #include "Hud.h"
 
+enum GameStates
+{
+	None,
+	Title,
+	Dungeon
+};
+
 class ZeldaNES :
 	public Component
 {
@@ -40,31 +54,31 @@ public:
 	void Update();
 	void Stop();
 	void Kill() { delete this; }
-	void UpdateCamera();
-
-	static Camera* camera;
 
 	// Virtuals Unused
 	void Draw() {}
 
-	void TravelTo(Level* prevRoom, Level* nextRoom, const int direction);
+	void TravelTo(Level* nextRoom, const int direction);
+	void UpdateCamera();
+	void HandleInputs();
+	void SwitchState(GameStates state);
+	static Camera* camera;
+
+
 private:
-
-	
-
-	Level *actualRoom;
-	Level *rooms[18];
-	Hud *hud;
-	Link *link;
-	Skeleton *skelly;
-	Slime *slimey;
-	MoblinRed *mobRed;
-	MoblinBlue *mobBlue;
-	Bats *bats;
-	Bomb* Bombe;
-	Bomb* Smog;
-	Objects* objects;
-	
+	Level		*currentRoom;
+	Level		*rooms[18];
+	Hud			*hud;
+	Link		*link;
+	Skeleton	*skelly;
+	Slime		*slimey;
+	MoblinRed   *mobRed;
+	MoblinBlue  *mobBlue;
+	Bats		*bats;
+	Bomb		*bomb;
+	Bomb		*smog;
+	Object		*object;
+	TitleScreen *titleScreen;
+	GameStates	currentState;
 	
 };
-

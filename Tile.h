@@ -2,11 +2,11 @@
 
 #include "Libraries.h"
 
-/*
-	This is the class for a single tile
-*/
+////////////////////////////////////////////////////////////////////////////
+//Tiles are used across the game to represent all the non-actor level assets.
+////////////////////////////////////////////////////////////////////////////
 
-// All the tile types, will change in the real game
+// All the available tile types
 enum tileTypes{
 	NORMAL = 0,
 	GREEN_BLOCK,
@@ -37,18 +37,14 @@ public:
 	Tile(int tileType);
 	~Tile();
 
-	//Functions needed for the abstract class component (when it will be...)
-	void Start() {}
-	void Stop()	 {}
 	void Draw()	 { Sprite::Draw(); }
-	void Update() {}
 
-	// Getters n Setters
+	// Getters & Setters
 	int GetType() { return type; }
 	SDL_Rect GetBox() { return box; }
 	void SetBox(int x, int y) { box.x = x, box.y = y; }
 
-	// Size of tile
+	// Tile size
 	static const int TILE_WIDTH = 16;
 	static const int TILE_HEIGHT = 16;
 
@@ -56,7 +52,7 @@ private:
 	// Collider
 	SDL_Rect box;
 
-	// What is that tile 
+	// Tile type
 	int type;
 };
 

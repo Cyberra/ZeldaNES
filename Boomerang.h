@@ -1,11 +1,17 @@
 #pragma once
 
 #include "Libraries.h"
-#include "Objects.h"
+#include "Object.h"
 #include "Tile.h"
 
+//////////////////////////////////////////////
+//Object: Boomerang
+//Throw the boomerang at an enemy to stun it.
+//Available in 2017
+//////////////////////////////////////////////
+
 class Boomerang
-	: public Objects
+	: public Object
 {
 public:
 	Boomerang();
@@ -17,17 +23,16 @@ public:
 	bool Collides(const Tile *tileToCheck);
 
 private:
-	// Speed of the bullet
+	// Boomerang speed
 	const int SPEED;
 
-	// Direction of the bullet
+	// Boomerang Direction
 	Vector2D direction;
 
-	// Position of the bullet
-	float currentX, currentY;
+	// Boomerang's position
+	float xPos, yPos;
 
 	const int NB_FRAME()						{ return 4; }
-
 	const point<int> FRAME_SIZE()				{ return{ 16, 16 }; };
 	const point<int> BOOMERANG_START_SRC()		{ return{ 16, 16 }; };
 };

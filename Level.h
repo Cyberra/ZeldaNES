@@ -1,8 +1,13 @@
 #pragma once
 
 #include "TileManager.h"
-#include "Player.h"
-#include "Enemies.h"
+#include "Entity.h"
+#include "Enemy.h"
+
+/////////////////////////////////////////////
+// Level
+// This represents one room of the dungeon.
+/////////////////////////////////////////////
 
 class Level 
 	: public TileManager
@@ -14,8 +19,8 @@ public:
 	virtual ~Level();
 
 	// Getter / Setter
-	void SetPlayer(Player* l){ player = l; }
-	void SetEnemies(Enemies* e){ enemy = e; }
+	void SetPlayer(Entity* l){ player = l; }
+	void SetEnemy(Enemy* e){ enemy = e; }
 
 	// Virtuals used
 	void Update();
@@ -26,12 +31,7 @@ public:
 	void Draw() {}
 	void Stop() {}
 
-	// Locals
-	void Show();
-	void Hide();
-
-
 protected:
-	Player* player;
-	Enemies* enemy;
+	Entity* player;
+	Enemy* enemy;
 };

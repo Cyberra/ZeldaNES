@@ -2,21 +2,20 @@
 
 // il contient la position de la texture de la bombe et de la fumer
 Bomb::Bomb()
-:Sprite(Texture::ID::Bombe, point<int>(192, 64), point<int>(16, 16))
-,Objects(Texture::ID::Smog, SMOG_NB_FRAME(), ANIM_DEFAULT_SPEED, SMOG_NB_POSITION(), FRAME_SIZE())
+:Object()
 , bombX()
 , bombY()
 , width()
 , heigth()
-, SmogX()
-, SmogY()
+, smogX()
+, smogY()
 , currentTime(1)
 
 {
-	
-
-	
+	bombe = new Sprite(Texture::ID::Bombe, point<int>(192, 64), point<int>(16, 16));
+	smog = new Animation(Texture::ID::Smog, SMOG_NB_FRAME(), ANIM_DEFAULT_SPEED, SMOG_NB_POSITION(), FRAME_SIZE());
 }
+
 Bomb::~Bomb()
 {
 }
@@ -39,18 +38,18 @@ void Bomb::Show( )
 {
 	bombX = 820;
 	bombY = 954;
-	SmogX = bombX;
-	SmogY = bombY;
+	smogX = (float)bombX;
+	smogY = (float)bombY;
 	// current time est plus grand que  1
 	if (currentTime >= 1)
 	{
 		 //qui soit visible, on créée une bombe et une fumer qui donne 5 de dommage
 		Visible = true;
-		Bombe = new Bomb();
+		bombe = new Bomb();
 		
 		sprite->SetPosition(bombX, bombY);
-		Smog = new Bomb();
-		Smog += domage;
+		smog = new Bomb();
+		smog += domage;
 		//entre dans la fonction clear
 		Clear();
 	}
@@ -71,7 +70,7 @@ void Bomb::Clear()
 	Visible = false;
 	// on deplace bombe et Smog de 1000 par x
 	bombX += 1000;
-	SmogX += 1000;
+	smogX += 1000;
 }
 void Bomb::Move()
 {
@@ -81,9 +80,9 @@ bool Bomb::TouchesBomb()
 	// on crée les v rectangle pour la bombe et la fumer
 	bool collect = false;
 	inventaire = 1;
-	Rectangle* rec1 = new Rectangle(box.x, box.y, box.w, box.h);
-	Rectangle * rec2 = new Rectangle(this->bombX, this->bombY, this->width, this->heigth);
-	Rectangle* rec3 = new Rectangle(this->SmogX, this->SmogY, this->width, this->heigth);
+	Rectangle* rec1 = new Rectangle((float)box.x, (float)box.y, (float)box.w, (float)box.h);
+	Rectangle * rec2 = new Rectangle((float)this->bombX, (float)this->bombY, (float)this->width, (float)this->heigth);
+	Rectangle* rec3 = new Rectangle((float)this->smogX, (float)this->smogY, (float)this->width, (float)this->heigth);
 	// si c'est un collectable
 	if (collect= true)
 	{    /// si on entre en collision avec la bombe
@@ -96,7 +95,6 @@ bool Bomb::TouchesBomb()
 	{  // colectable est false
 		return collect;
 	}
-	
-	
+	return collect;
 }
 

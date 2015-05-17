@@ -2,7 +2,7 @@
 #include "Boomerang.h"
 
 Boomerang::Boomerang()
-	: Objects(Texture::ID::LinkAnims, NB_FRAME(), ANIM_DEFAULT_SPEED, BOOMERANG_START_SRC(), FRAME_SIZE())
+	: Object(Texture::ID::LinkAnims, NB_FRAME(), ANIM_DEFAULT_SPEED, BOOMERANG_START_SRC(), FRAME_SIZE())
 	, SPEED(60)
 {
 	isVisible = false;
@@ -17,7 +17,7 @@ Boomerang::~Boomerang()
 
 }
 
-void Boomerang::Init(float currentX, float currentY, Vector2D &direction)
+void Boomerang::Init(float xPos, float yPos, Vector2D &direction)
 {
 	if (direction.x == 0 && direction.y == 0)
 	{
@@ -26,9 +26,9 @@ void Boomerang::Init(float currentX, float currentY, Vector2D &direction)
 
 	isVisible = true;
 	this->direction = direction;
-	this->currentX = currentX;
-	this->currentY = currentY;
-	SetPosition((int)this->currentX, (int)this->currentY);
+	this->xPos = xPos;
+	this->yPos = yPos;
+	SetPosition((int)this->xPos, (int)this->yPos);
 }
 
 void Boomerang::Clear()
@@ -40,10 +40,10 @@ void Boomerang::Move()
 {
 	float dt = Engine::GetInstance()->GetTimer()->GetDeltaTime();
 
-	currentX += SPEED * direction.x * dt;
-	currentY += SPEED * direction.y * dt;
+	xPos += SPEED * direction.x * dt;
+	yPos += SPEED * direction.y * dt;
 
-	this->SetPosition((int)currentX, (int)currentY);
+	this->SetPosition((int)xPos, (int)yPos);
 }
 
 // Function that check if there is a collision

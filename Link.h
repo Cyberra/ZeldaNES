@@ -1,13 +1,18 @@
 #pragma once
 
 #include "Libraries.h"
-#include "Player.h"
+#include "Entity.h"
 #include "Level.h"
 #include "Pool.h"
 #include "Boomerang.h"
 
+/////////////////////////////////////////////
+// Link
+// This is the player's class.
+/////////////////////////////////////////////
+
 class Link
-	: public Player
+	: public Animation, public virtual Entity
 {
 public:
 	Link();
@@ -16,11 +21,11 @@ public:
 	void Update();
 
 	// Getter
-	Level const *GetRoom() { return actualRoom; }
+	Level const *GetRoom() { return currentRoom; }
 	int const GetLinkHealth() { return linkHealth; }
 	int const GetLinkMaxHealth() { return linkMaxHealth; }
 
-	point<int> GetNextPos(const Vector2D &direction);
+	point<int> const GetNextPos(const Vector2D &direction);
 
 
 	// Size of the Dot collision box
@@ -33,16 +38,15 @@ public:
 	void Move(TileManager* tm);
 	void MoveBox(const Vector2D &direction);
 
-	bool isAttacking;
-	
+
 private:
 
 	// Speed of the Dot
 	const float SPEED;
 
 	// Stats
-	float linkHealth;
-	float linkMaxHealth;
+	int linkHealth;
+	int linkMaxHealth;
 
 	// States used by Link.
 	enum state {
@@ -61,8 +65,6 @@ private:
 	void Attack(float time);
 
 	float attackTimer;
-	float linkX;
-	float linkY;
 	bool isCollecting;
 	bool facingLeft;
 	bool facingRight;
@@ -70,10 +72,12 @@ private:
 	bool facingDown;
 	bool isMoving;
 
-	Level *actualRoom;
+	bool isAttacking;
+
+	Level *currentRoom;
 
 	Pool<Boomerang>* boomerangPool;
-	Boomerang* actualBoomerang;
+	Boomerang* boomerang;
 
 	SDL_Rect collider;
 	state currentState;

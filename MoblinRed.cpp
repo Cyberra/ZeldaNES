@@ -1,29 +1,24 @@
 #include "MoblinRed.h"
 
+const int SPAWN_X = 800;
+const int SPAWN_Y = 900;
 
 MoblinRed::MoblinRed()
-	: Enemies(Texture::ID::MoblinRed, NUM_OF_FRAMES(), ANIM_DEFAULT_SPEED, MOB_RED_ANIM_SRC(), FRAME_SIZE())
-	, direction(0.0f, -1.0f)
-	, mobRedX(800)
-	, mobRedY(900)
-	, moveTimer(0)
-	, randomizer(0)
-	, isAlive(true)
-	, isStunned(false)
-	, currentRoom(nullptr)
+	: Enemy(Texture::ID::MoblinRed, NUM_OF_FRAMES(), ANIM_DEFAULT_SPEED, MOB_RED_ANIM_SRC(), FRAME_SIZE())
 {
-	SetPosition(mobRedX, mobRedY);
+	xPos = SPAWN_X;
+	yPos = SPAWN_Y;
+	SetPosition(SPAWN_X, SPAWN_Y);
 	this->Play();
 	this->SetIsLooping(true);
 	collider.h = FRAME_SIZE().x;
 	collider.w = FRAME_SIZE().y;
-	collider.x = (int)mobRedX;
-	collider.y = (int)mobRedY;
+	collider.x = (int)xPos;
+	collider.y = (int)yPos;
 }
 
 MoblinRed::~MoblinRed()
 {
-	delete currentRoom;
 }
 
 void MoblinRed::Update()
@@ -32,15 +27,9 @@ void MoblinRed::Update()
 	{
 		Animation::Update();
 		randomizer = rand() % 4;
-		collider.x = mobRedX;
-		collider.y = mobRedY;
+		collider.x = (int)xPos;
+		collider.y = (int)yPos;
 	}
-}
-// Move the collider
-void MoblinRed::MoveCollider(const Vector2D &direction)
-{
-	collider.x = GetNextPos(direction).x;
-	collider.y = GetNextPos(direction).y;
 }
 
 void MoblinRed::Move(TileManager* tm)
@@ -56,63 +45,20 @@ void MoblinRed::Move(TileManager* tm)
 		}
 		if (tm->TouchesWall(collider))
 		{
-			mobRedX -= direction.x;
-			mobRedY -= direction.y;
+			xPos -= direction.x;
+			yPos -= direction.y;
 			ChangeDirection(randomizer);
 		}
 		else
 		{
-			mobRedX += (direction.x * 40) * dt;
-			mobRedY += (direction.y * 40) * dt;
+			xPos += (direction.x * 40) * dt;
+			yPos += (direction.y * 40) * dt;
 		}
-		SetPosition(mobRedX, mobRedY);
-	}
-}
-// Checks for a collision at the next tile
-point<int> MoblinRed::GetNextPos(const Vector2D &direction)
-{
-	point<int> p;
-	p.x = mobRedX + direction.x;
-	p.y = mobRedY + direction.y;
-	return p;
-}
-void MoblinRed::ChangeDirection(int choice)
-{
-	switch (choice)
-	{
-	case NORTH:
-		SetDirection(UP);
-		break;
-	case EAST:
-		SetDirection(RIGHT);
-		break;
-	case SOUTH:
-		SetDirection(DOWN);
-		break;
-	case WEST:
-		SetDirection(LEFT);
-		break;
-	default:
-		break;
+		SetPosition((int)xPos, (int)yPos);
 	}
 }
 void MoblinRed::Enter(Level* room)
 {
 	currentRoom = room;
-	room->SetEnemies(this);
-}
-
-void MoblinRed::Lacerate(SDL_Rect hitter)
-{
-	Rectangle *r1 = new Rectangle(hitter.x, hitter.y, hitter.w, hitter.h);
-	Rectangle *r2 = new Rectangle(this->collider.x, this->collider.y, this->collider.w, this->collider.h);
-
-	if (r2->CollidesWith(r1))
-	{
-		this->isAlive = false;
-		this->SetVisible(false);
-	}
-	delete r2, r1;
-	r2 = nullptr;
-	r1 = nullptr;
+	room->SetEnemy(this);
 }
