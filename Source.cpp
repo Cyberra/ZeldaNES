@@ -7,7 +7,7 @@ int main(int argc, char* args[])
 {
 	// Initializes the engine
 	 cEngine->Init(SCREEN_LENGTH, SCREEN_HEIGHT);
-	//cEngine->Init(800, 750, RESOLUTION_NTSC); 
+	//cEngine->Init(800, 750, RESOLUTION_NTSC);
 	
 	ZeldaNES* zeldaNES = new ZeldaNES();
 	

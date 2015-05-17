@@ -62,7 +62,9 @@ public:
 	void UpdateCamera();
 	void HandleInputs();
 	void SwitchState(GameStates state);
+
 	static Camera* camera;
+	static Camera* GetCamera() { return camera; }
 
 
 private:

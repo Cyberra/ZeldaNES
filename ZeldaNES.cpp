@@ -131,7 +131,7 @@ void ZeldaNES::TravelTo(Level* nextRoom, const int direction)
 
 void ZeldaNES::UpdateCamera()
 {
-	camera->SetCameraPosition(400, 400);
+	
 }
 
 void ZeldaNES::HandleInputs()

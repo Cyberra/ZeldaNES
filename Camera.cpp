@@ -10,8 +10,8 @@ const point<int> DEFAULT_RESOLUTION = RESOLUTION_NTSC;
 Camera::Camera()
 {
 	view = new SDL_Rect();
-	view->x = 800;
-	view->y = 400;
+	view->x = 0;
+	view->y = 0;
 	view->w = DEFAULT_RESOLUTION.x;
 	view->h = DEFAULT_RESOLUTION.y;
 }

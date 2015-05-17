@@ -1,4 +1,5 @@
 #include "TileManager.h"
+#include "ZeldaNES.h"
 
 TileManager::TileManager()
 {
@@ -154,7 +155,7 @@ TileManager::TileManager(std::string mapPath)
 			{
 				//std::cout << i << ": " << tileType << std::endl;
 				tiles[i] = new Tile(tileType);
-				tiles[i]->SetPosition(x, y);
+				tiles[i]->SetPosition((int)x - ZeldaNES::GetCamera()->GetView()->x, (int)y - ZeldaNES::GetCamera()->GetView()->y);;
 				tiles[i]->SetBox(x, y);
 				//std::cout << tiles[i]->GetBox().x << ", " << tiles[i]->GetBox().y << std::endl;
 			}
