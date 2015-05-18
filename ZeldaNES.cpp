@@ -114,25 +114,19 @@ void ZeldaNES::Update()
 	HandleInputs();
 	UpdateCamera();
 	
-	//Here's my idea of the logic behind it.
-	// I can only think of making a collider for each room and when Link's
-	// collider overlaps the other room, he "travels" to it.
-	//std::cout << link->GetCurrentPos().x << std::endl;
-	//
-	//if (link->GetCurrentPos().x >= rooms[0]->GetRoomOffset().x
-	//	|| link->GetCurrentPos().x <= rooms[0]->GetRoomOffset().x + LEVEL_WIDTH)
-	//{
-	//	TravelTo(rooms[0], 0);
-	//}
-	//else if (link->GetCurrentPos().x >= rooms[1]->GetRoomOffset().x
-	//	|| link->GetCurrentPos().x <= rooms[1]->GetRoomOffset().x + LEVEL_WIDTH)
-	//{
-	//	TravelTo(rooms[1], 0);
-	//}
-
-	
-	
-
+	// THis does work for changing rooms.......
+	// But it doesn't work for having the right room.
+	// I'm dropping this here just because.... I'd rather having room changing than always having the same room.
+	for (int i = 0; i < NB_ROOMS; ++i)
+	{
+		if (link->GetCurrentPos().x == rooms[i]->GetRoomOffset().x
+			||	link->GetCurrentPos().x == rooms[i]->GetRoomOffset().x + LEVEL_WIDTH
+			||	link->GetCurrentPos().y == rooms[i]->GetRoomOffset().y
+			||	link->GetCurrentPos().y == rooms[i]->GetRoomOffset().y + LEVEL_HEIGHT)
+		{
+			TravelTo(rooms[i], 0);	
+		}
+	}
 }
 
 void ZeldaNES::Stop()
