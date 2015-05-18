@@ -21,6 +21,7 @@ public:
 	// Getter / Setter
 	void SetPlayer(Entity* l){ player = l; }
 	void SetEnemy(Enemy* e){ enemy.push_back(e); }
+	virtual point<int> const GetRoomOffset() = 0;
 	// Virtuals used
 	void Update();
 	void Kill() { delete this; }

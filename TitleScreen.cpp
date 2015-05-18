@@ -17,14 +17,14 @@ TitleScreen::~TitleScreen()
 
 void TitleScreen::Start()
 {
-	AudioSys->PlayMusic(Musics->Get(Music::ID::Title));
+	//AudioSys->PlayMusic(Musics->Get(Music::ID::Title));
 	background->Play();
 	background->SetActive(true);
 }
 
 void TitleScreen::Stop()
 {
-	AudioSys->StopMusic();
+	//AudioSys->StopMusic();
 	background->Stop();
 	background->SetActive(false);
 }

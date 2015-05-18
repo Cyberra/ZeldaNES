@@ -8,5 +8,8 @@ class Room01 :
 public:
 	Room01();
 	~Room01();
+
+	point<int> const GetRoomOffset(){ return OFFSET_ROOM_1; }
+	
 };
 

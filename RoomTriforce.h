@@ -6,5 +6,6 @@ class RoomTriforce :
 public:
 	RoomTriforce();
 	~RoomTriforce();
+	point<int> const  GetRoomOffset(){ return OFFSET_ROOM_TRIFORCE; }
 };
 

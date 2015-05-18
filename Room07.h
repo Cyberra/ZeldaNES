@@ -6,5 +6,7 @@ class Room07 :
 public:
 	Room07();
 	~Room07();
+
+	point<int> const  GetRoomOffset(){ return OFFSET_ROOM_7; }
 };
 

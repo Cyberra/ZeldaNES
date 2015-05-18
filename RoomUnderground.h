@@ -6,5 +6,7 @@ class RoomUnderground :
 public:
 	RoomUnderground();
 	~RoomUnderground();
+
+	point<int> const  GetRoomOffset(){ return OFFSET_ROOM_UNDERGROUND; }
 };
 

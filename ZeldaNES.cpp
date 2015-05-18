@@ -117,19 +117,20 @@ void ZeldaNES::Update()
 	//Here's my idea of the logic behind it.
 	// I can only think of making a collider for each room and when Link's
 	// collider overlaps the other room, he "travels" to it.
-	//if (link->GetCurrentPos().x == rooms[0]->GetOffSet("Room01.map").x &&
-	//	link->GetCurrentPos().y == rooms[0]->GetOffSet("Room01.map").y)
+	//std::cout << link->GetCurrentPos().x << std::endl;
+	//
+	//if (link->GetCurrentPos().x >= rooms[0]->GetRoomOffset().x
+	//	|| link->GetCurrentPos().x <= rooms[0]->GetRoomOffset().x + LEVEL_WIDTH)
+	//{
+	//	TravelTo(rooms[0], 0);
+	//}
+	//else if (link->GetCurrentPos().x >= rooms[1]->GetRoomOffset().x
+	//	|| link->GetCurrentPos().x <= rooms[1]->GetRoomOffset().x + LEVEL_WIDTH)
 	//{
 	//	TravelTo(rooms[1], 0);
 	//}
-	//else if (link->GetCurrentPos().x == rooms[1]->GetOffSet("Room02.map").x)
-	//{
-	//	TravelTo(rooms[2], 0);
-	//}
-	//if (link->GetCurrentPos().x == rooms[2]->GetOffSet("Room03.map").x)
-	//{
-	//	TravelTo(rooms[3], 0);
-	//}
+
+	
 	
 
 }
@@ -243,7 +244,7 @@ void ZeldaNES::SwitchState(GameStates state)
 		case (Dungeon) :
 			currentRoom = rooms[0];
 			titleScreen->Stop();
-			AudioSys->PlayMusic(Musics->Get(Music::ID::Dungeon));
+			//AudioSys->PlayMusic(Musics->Get(Music::ID::Dungeon));
 			//for (int i = 0; i < NB_ROOMS; i++)
 			//{
 			//	rooms[i]->SetActive(true);
@@ -255,13 +256,13 @@ void ZeldaNES::SwitchState(GameStates state)
 			mobRed		->SetActive(true);
 			mobBlue		->SetActive(true);
 			currentRoom->SetActive(true);
-			skelly	->Enter(rooms[0]);
-			slimey	->Enter(rooms[0]);
-			bats	->Enter(rooms[0]);
-			mobRed	->Enter(rooms[0]);
-			mobBlue	->Enter(rooms[0]);
-			link	->Enter(rooms[0]);
-			link	->Leave(rooms[1]);
+			link		->Enter(rooms[0]);
+			link		->Leave(rooms[1]);
+			skelly		->Enter(currentRoom);
+			slimey		->Enter(currentRoom);
+			bats		->Enter(currentRoom);
+			mobRed		->Enter(currentRoom);
+			mobBlue		->Enter(currentRoom);
 			break;
 		case (Title) :
 			titleScreen->Start();
