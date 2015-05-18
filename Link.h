@@ -26,6 +26,7 @@ public:
 	int const GetLinkMaxHealth() { return linkMaxHealth; }
 
 	point<int> const GetNextPos(const Vector2D &direction);
+	point<int> const GetCurrentPos();
 
 
 	// Size of the Dot collision box

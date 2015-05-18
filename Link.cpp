@@ -32,11 +32,17 @@ Link::~Link()
 	boomerangPool = nullptr;
 	currentRoom = nullptr;
 }
+point<int> const Link::GetCurrentPos()
+{
+	point<int> myPosition((int)this->xPos, (int)this->yPos);
+	return myPosition;
+}
+
 
 void Link::changeState(state newState)
 {
 	//////////////////////////////////////////////
-	// INSERT CASES FOR EACH ANIMS DOWN HERE
+	// INSERT CASES FOR EACH ANIMATION DOWN HERE
 	//////////////////////////////////////////////
 
 	if (this->currentState != newState)
