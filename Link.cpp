@@ -32,6 +32,8 @@ Link::~Link()
 	boomerangPool = nullptr;
 	currentRoom = nullptr;
 }
+
+// Get link current position
 point<int> const Link::GetCurrentPos()
 {
 	point<int> myPosition((int)this->xPos, (int)this->yPos);
@@ -126,6 +128,7 @@ void Link::changeState(state newState)
 	}
 }
 
+// Get link next position...Mainly for collision purpose
 point<int> const Link::GetNextPos(const Vector2D &direction)
 {
 	point<int> p;
@@ -135,7 +138,7 @@ point<int> const Link::GetNextPos(const Vector2D &direction)
 
 	return p;
 }
-
+// // Function to make link enter the room 
 void Link::Enter(Level* room)
 {
 	currentRoom = room;
@@ -143,6 +146,7 @@ void Link::Enter(Level* room)
 	room->SetPlayer(this);
 }
 
+// Function to make link leave the room 
 void Link::Leave(Level* room)
 {
 	room->SetPlayer(nullptr);
@@ -333,93 +337,3 @@ void Link::FaceRight()
 	facingUp = false;
 	facingDown = false;
 }
-
-/*
-void Link::Update()
-{
-	//////////////////////////////////////////////
-	// VARIABLES UPDATED EVERY FRAMES
-	//////////////////////////////////////////////
-
-	// Get delta time.
-	float delta = Engine::GetInstance()->GetTimer()->GetDeltaTime();
-
-	// Very important, otherwise our animation won't update itself
-	Animation::Update();
-
-	// Updates position of the player.
-	SetPosition((int)xPos, (int)yPos);
-
-	//////////////////////////////////////////////
-	// CONTROLS USED FOR LINK
-	//////////////////////////////////////////////
-
-	// W
-	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_W))
-	{
-		changeState(WALK_UP);
-		yPos--;
-	}
-
-	// A
-	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_A))
-	{
-		changeState(WALK_LEFT);
-		xPos--;
-	}
-
-	// S
-	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_S))
-	{
-		changeState(WALK_DOWN);
-		yPos++;
-	}
-
-	// D
-	if (Engine::GetInstance()->GetInput()->IsKeyHeld(SDL_SCANCODE_D))
-	{
-		changeState(WALK_RIGHT);
-		xPos++;
-	}
-
-	// KP 1
-	if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_KP_1) && currentState == WALK_LEFT)
-	{
-		changeState(ATK_LEFT);
-		if (Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_KP_1))
-		{
-			changeState(WALK_LEFT);
-		}
-	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_KP_1) && currentState == WALK_RIGHT)
-	{
-		changeState(ATK_RIGHT);
-		if (Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_KP_1))
-		{
-			changeState(WALK_RIGHT);
-		}
-	}
-	else if (Engine::GetInstance()->GetInput()->IsKeyPressed(SDL_SCANCODE_KP_1) && currentState == WALK_UP)
-	{
-		changeState(ATK_UP);
-		if (Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_KP_1))
-		{
-			changeState(WALK_UP);
-		}
-	}
-	else
-	{
-		changeState(ATK_DOWN);
-		if (Engine::GetInstance()->GetInput()->IsKeyReleased(SDL_SCANCODE_KP_1))
-		{
-			changeState(WALK_DOWN);
-		}
-	}
-
-	// If Link picks up a collectable  ////// TODO ///////
-	if (isCollecting == true)
-	{
-		changeState(PICK_OBJECT);
-	}
-}
-*/

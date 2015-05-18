@@ -47,7 +47,7 @@ protected:
 	const point<int> OFFSET_ROOM_1 =			{732, 864};
 	const point<int> OFFSET_ROOM_2 =			{492, 864};
 	const point<int> OFFSET_ROOM_3 =			{972, 864};
-	const point<int> OFFSET_ROOM_4 =			{732, 864};
+	const point<int> OFFSET_ROOM_4 =			{732, 720};
 	const point<int> OFFSET_ROOM_5 =			{492, 544};
 	const point<int> OFFSET_ROOM_6 =			{732, 544};
 	const point<int> OFFSET_ROOM_7 =			{972, 544};

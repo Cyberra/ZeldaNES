@@ -7,7 +7,7 @@ TileManager::TileManager()
 }
 
 // Function kind of arcoded...but as always....had to make it work FAST,so I came with this ugly idea
-// it works and causes no real harm...but yeah...it's really bad !
+// it works and cause
 point<int> TileManager::GetOffSet(const std::string map)
 {
 	if (map == "Room01.map")
